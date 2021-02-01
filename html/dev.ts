@@ -91,32 +91,7 @@ const treeData = [
             name: "child1Child1",
             type: 'default',
             key: "1-1-16",
-          },
-          {
-            name: "child1Child2",
-            type: 'default',
-            key: "1-1-17",
-          },
-          {
-            name: "child1Child3",
-            type: 'default',
-            key: "1-1-18",
-          },
-          {
-            name: "child1Child1",
-            type: 'default',
-            key: "1-1-19",
-          },
-          {
-            name: "child1Child2",
-            type: 'default',
-            key: "1-1-20",
-          },
-          {
-            name: "child1Child3",
-            type: 'default',
-            key: "1-1-21",
-          },
+          }
         ],
       },
       {
@@ -148,6 +123,37 @@ const treeData = [
             type: 'input',
             value: 'name: input',
             key: '2-1-1'
+          }
+        ],
+      },
+    ],
+  },
+  {
+    name: "root2",
+    type: 'default',
+    key: "3",
+    children: [
+      {
+        name: "",
+        type: 'select',
+        group: [
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' },
+        ],
+        value: 'Apple',
+        key: "3-1",
+        children: [
+          {
+            name: '',
+            type: 'input',
+            options: {
+              disabled: true,
+              max: 10,
+              min: 5,
+            },
+            value: 'name: input',
+            key: '3-1-1'
           }
         ],
       },
