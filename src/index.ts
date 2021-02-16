@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-02-09 19:47:33
- * @LastEditTime: 2021-02-14 08:36:26
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-02-16 19:56:37
+ * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\src\index.ts
  */
@@ -31,14 +31,27 @@
  * 　　　　┗┻┛　┗┻┛+ + + +
  * 
  */
-import action from './action'
+// import action from './action'
+class action {
+    add() {
+        console.log('add');
+    }
+    delete() {
+        console.log('delete');
+    }
+    changeValue() {
+        console.log('changeValue');
+    }
+}
+
 interface options {
     container: HTMLElement
     data: Array<treeData>
     columns: Array<columns>
 }
 interface treeData {
-    name: string,
+    name: string
+    key: string
     children?: Array<treeData>
 }
 interface columns {
@@ -50,22 +63,27 @@ interface columns {
  * @param {*} options { container, data }
  * @return {*} htmlElement Table
  */
-class Table {
-    private container: HTMLElement | null // 存放表格的组件
-    private data: Array<treeData> // 数据
-    private columns: Array<columns> // 
+class Table extends action {
+    private container: HTMLElement // 存放表格的组件
+    private data!: Array<treeData>; // 数据
+    private columns: Array<columns> // 表头的数据
     fragment: DocumentFragment
-
+    set treeData (value: Array<treeData>) {
+        this.data = value
+        this.createTable()
+    }
     constructor(options: options) {
+        super()
         const { container, data, columns } = options
         this.container = container
-        this.data = data
         this.columns = columns
         this.fragment = document.createDocumentFragment()
+        this.treeData = data
         this.createTable()
         this.setCellWidth()
     }
     createTable() { // 创建表格组件
+        while (this.container.lastChild) this.container.removeChild(this.container.lastChild)
         const tableBody = document.createElement('div') // 表格的body
         tableBody.className = 'tableBody'
         this.readData(this.data, tableBody);
@@ -77,7 +95,7 @@ class Table {
         const cell = document.createElement('div')
         return cell
     }
-    createColumns () { // 创建表格头部
+    createColumns() { // 创建表格头部
         const columns = document.createElement('div') // 表格的头部
         columns.className = 'columns'
         this.columns.forEach((item: columns) => {
@@ -94,40 +112,36 @@ class Table {
     }
     readData(cells: Array<treeData>, parentNode: Element | DocumentFragment): void { // 递归读取数据
         return cells.forEach((item: treeData) => {
-            const cell: HTMLElement = this.createCell()
             const cellCon: HTMLElement = this.createCell()
+            const cell: HTMLElement = this.createCell()
             cellCon.className = 'cellCon'
             cell.innerHTML = item.name
             cell.className = 'cell'
+            cell.setAttribute('key', item.key)
+            cell.addEventListener('click', (event) => {
+                // 
+            }, false)
+            const keyArr = item.key.split('-')
+            const keyLength = keyArr.length
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
                 const childrenCell: HTMLElement = this.createCell()
                 this.readData(item.children, childrenCell)
                 this.appendCell(cellCon, childrenCell)
-            } else if (this.columns.length) {
+            } else if (this.columns.length > keyLength) {
                 // 如果不够columns的长度就在后面补零
+                const childrenCell: HTMLElement = this.createCell()
+                this.readData([{ name: '', key: item.key + '-1' }], childrenCell)
+                this.appendCell(cellCon, childrenCell)
             }
         })
     }
-    setCellWidth () {
+    setCellWidth() {
         const width = document.querySelectorAll('.column')[0].clientWidth
         document.querySelectorAll('.cell').forEach((item: any) => {
-                item.style.width = width + 'px'
+            item.style.width = width + 'px'
         })
     }
 }
-// (   <div>
-//         <div>
-//             root
-//         </div>
-//         <div>
-//             <div>child1</div>
-//             <div>child2</div>
-//             <div>child3</div>
-//             <div>child4</div>
-//             <div>child5</div>
-//         </div>
-//     </div>
-// )
 export default Table

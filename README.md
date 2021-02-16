@@ -1,8 +1,8 @@
 <!--
  * @Author: chenhaolin
  * @Date: 2021-02-07 16:44:44
- * @LastEditTime: 2021-02-10 18:30:27
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-02-16 20:11:17
+ * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\README.md
 -->
@@ -27,3 +27,10 @@
 ## install
 
 > npm install ru-merge-cell
+
+## 使用说明
+
+```javascript
+import Table form 'ru-merge-cell'
+var table = new Table(container)
+```
