@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-09 19:47:33
- * @LastEditTime: 2021-02-19 10:06:38
+ * @LastEditTime: 2021-02-19 16:55:17
  * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\src\index.ts
@@ -51,6 +51,7 @@ interface columns {
 }
 
 class Model {
+    [x: string]: any
     createEle(type: string, value?: string) {
         const ele = document.createElement(type)
         if (value) ele.innerHTML = value
@@ -63,33 +64,77 @@ class Model {
     addEvent(elem: Node, type: string, callback: EventListener) {
         elem.addEventListener(type, callback, false)
     }
-    renderModel() {
-        const div = this.createEle('div') // model -> container
+    renderModel(labelName: string, item: treeData) {
+        const modelContainer = this.createEle('div') // model -> container
+        modelContainer.className = 'model-container'
+        const div = this.createEle('div') // model
+        div.className = 'model'
+        const header = this.createEle('div') // model-header
+        header.className = 'model-header'
+        const body = this.createEle('div') // model-body
+        body.className = 'model-body'
+        const footer = this.createEle('div') // model-footer
+        footer.className = 'model-footer'
         const addButton = this.createEle('button', '添加') // model -> add -> button
         const deleteButton = this.createEle('button', '删除') // model -> delete -> button
         const changeButton = this.createEle('button', '修改') // model -> delete -> button
+        const cancelButton = this.createEle('button', '取消') // model -> delete -> button
+        const label = this.createEle('span', labelName) // model -> delete -> button
         const changeInput = this.createEle('input') // model -> changeInput -> button 
-        this.appendCell(div, changeInput)
-        this.appendCell(div, addButton)
-        this.appendCell(div, deleteButton)
-        this.appendCell(div, changeButton)
-        this.addEvent(addButton, 'click', (event: MouseEvent | any) => {
-            console.log(event);
+        this.appendCell(body, label)
+        this.appendCell(body, changeInput)
+        this.appendCell(footer, addButton)
+        this.appendCell(footer, changeButton)
+        this.appendCell(footer, deleteButton)
+        this.appendCell(footer, cancelButton)
+
+        this.appendCell(div, header)
+        this.appendCell(div, body)
+        this.appendCell(div, footer)
+        this.appendCell(modelContainer, div)
+        const { key } = item
+        const keyArr = key.split("-")
+        this.addEvent(addButton, 'click', () => { // 添加
+            this.changetreeData('add', keyArr, this.data, changeInput.value)
+            this.treeData = this.data
             this.removeModel()
         })
-        this.addEvent(deleteButton, 'click', (event: MouseEvent | any) => {
-            console.log(event);
+        this.addEvent(changeButton, 'click', () => { // 修改
+            this.changetreeData('change', keyArr, this.data, changeInput.value)
+            this.treeData = this.data
             this.removeModel()
         })
-        this.addEvent(changeButton, 'click', (event: MouseEvent | any) => {
-            console.log(event);
-            console.log(changeInput.value, 'changeInput');
+        this.addEvent(deleteButton, 'click', () => { // 删除
+            this.changetreeData('delete', keyArr, this.data, changeInput.value)
+            this.treeData = this.data
             this.removeModel()
         })
-        document.body.appendChild(div)
+        this.addEvent(cancelButton, 'click', () => { // 删除
+            this.removeModel()
+        })
+        document.body.appendChild(modelContainer)
     }
     removeModel() { // 类弹窗操作
         document.body.removeChild(document.body.lastChild)
+    }
+    changetreeData(type: string, key: Array<string>, data: Array<treeData>, value: string) {
+        let newData: any = data
+        for (let i = 0; i < key.length - 1; i++) {
+            newData = data[Number(key[i]) - 1].children
+        }
+        if (type === 'add') {
+            let addKey = JSON.parse(JSON.stringify(key))
+            addKey[key.length - 1] = String(newData.length + 1)
+            const addData = {
+                name: value,
+                key: addKey.join('-')
+            }
+            newData.splice(Number(key[key.length - 1]), 0, addData)
+        } else if (type === 'change') {
+            newData[Number(key[key.length - 1]) - 1].name = value
+        } else {
+            newData.splice(Number(key[key.length - 1]) - 1, 1)
+        }
     }
 }
 
@@ -98,27 +143,27 @@ class Model {
  * @param {*} 
  * @return {*} 
  */
-class Action extends Model {
-    constructor() {
-        super()
-    }
-    add() {
-        console.log('add');
-        this.renderModel()
-    }
-    delete() {
-        console.log('delete');
-    }
-    changeValue() {
-        console.log('changeValue');
-    }
-}
+// class Action extends Model {
+//     constructor() {
+//         super()
+//     }
+//     add(label: string) {
+//         console.log('add');
+//         // this.renderModel(label)
+//     }
+//     delete() {
+//         console.log('delete');
+//     }
+//     changeValue() {
+//         console.log('changeValue');
+//     }
+// }
 /**
  * @description: 生成表格类 
  * @param {*} options { container, data }
  * @return {*} htmlElement Table
  */
-class Table extends Action {
+class Table extends Model {
     private container: HTMLElement // 存放表格的组件
     private data!: Array<treeData>; // 数据
     private columns: Array<columns> // 表头的数据
@@ -126,6 +171,7 @@ class Table extends Action {
     set treeData(value: Array<treeData>) {
         this.data = value
         this.createTable()
+        this.setCellWidth()
     }
     constructor(options: options) {
         super()
@@ -173,17 +219,15 @@ class Table extends Action {
             cell.innerHTML = item.name
             cell.className = 'cell'
             cell.setAttribute('key', item.key)
+            const keyArr = item.key.split('-')
+            const keyLength = keyArr.length
             cell.addEventListener('click', (event: MouseEvent | any) => {
-                // 
                 event.target.style.background = '#f99'
             }, false);
             cell.addEventListener('dblclick', (event: MouseEvent | any) => {
-                // 
                 event.target.style.background = ''
-                this.add()
+                this.renderModel(this.columns[keyLength - 1].title, item)
             }, false);
-            const keyArr = item.key.split('-')
-            const keyLength = keyArr.length
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
@@ -192,9 +236,9 @@ class Table extends Action {
                 this.appendCell(cellCon, childrenCell)
             } else if (this.columns.length > keyLength) {
                 // 如果不够columns的长度就在后面补零
-                const childrenCell: HTMLElement = this.createCell()
-                this.readData([{ name: '', key: item.key + '-1' }], childrenCell)
-                this.appendCell(cellCon, childrenCell)
+                // const childrenCell: HTMLElement = this.createCell()
+                this.readData([{ name: '', key: item.key + '-1' }], cellCon)
+                // this.appendCell(cellCon, childrenCell)
             }
         })
     }
