@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-09 19:47:33
- * @LastEditTime: 2021-02-16 19:56:37
+ * @LastEditTime: 2021-02-19 10:06:38
  * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\src\index.ts
@@ -31,19 +31,10 @@
  * 　　　　┗┻┛　┗┻┛+ + + +
  * 
  */
-// import action from './action'
-class action {
-    add() {
-        console.log('add');
-    }
-    delete() {
-        console.log('delete');
-    }
-    changeValue() {
-        console.log('changeValue');
-    }
-}
 
+import { domainToUnicode } from "url"
+
+// import action from './action'
 interface options {
     container: HTMLElement
     data: Array<treeData>
@@ -58,17 +49,81 @@ interface columns {
     key: number
     title: string
 }
+
+class Model {
+    createEle(type: string, value?: string) {
+        const ele = document.createElement(type)
+        if (value) ele.innerHTML = value
+        return ele
+    }
+
+    appendCell(parentNode: Node, childrenNode: Node) { // 添加子节点
+        parentNode.appendChild(childrenNode)
+    }
+    addEvent(elem: Node, type: string, callback: EventListener) {
+        elem.addEventListener(type, callback, false)
+    }
+    renderModel() {
+        const div = this.createEle('div') // model -> container
+        const addButton = this.createEle('button', '添加') // model -> add -> button
+        const deleteButton = this.createEle('button', '删除') // model -> delete -> button
+        const changeButton = this.createEle('button', '修改') // model -> delete -> button
+        const changeInput = this.createEle('input') // model -> changeInput -> button 
+        this.appendCell(div, changeInput)
+        this.appendCell(div, addButton)
+        this.appendCell(div, deleteButton)
+        this.appendCell(div, changeButton)
+        this.addEvent(addButton, 'click', (event: MouseEvent | any) => {
+            console.log(event);
+            this.removeModel()
+        })
+        this.addEvent(deleteButton, 'click', (event: MouseEvent | any) => {
+            console.log(event);
+            this.removeModel()
+        })
+        this.addEvent(changeButton, 'click', (event: MouseEvent | any) => {
+            console.log(event);
+            console.log(changeInput.value, 'changeInput');
+            this.removeModel()
+        })
+        document.body.appendChild(div)
+    }
+    removeModel() { // 类弹窗操作
+        document.body.removeChild(document.body.lastChild)
+    }
+}
+
+/**
+ * @description: table的操作
+ * @param {*} 
+ * @return {*} 
+ */
+class Action extends Model {
+    constructor() {
+        super()
+    }
+    add() {
+        console.log('add');
+        this.renderModel()
+    }
+    delete() {
+        console.log('delete');
+    }
+    changeValue() {
+        console.log('changeValue');
+    }
+}
 /**
  * @description: 生成表格类 
  * @param {*} options { container, data }
  * @return {*} htmlElement Table
  */
-class Table extends action {
+class Table extends Action {
     private container: HTMLElement // 存放表格的组件
     private data!: Array<treeData>; // 数据
     private columns: Array<columns> // 表头的数据
     fragment: DocumentFragment
-    set treeData (value: Array<treeData>) {
+    set treeData(value: Array<treeData>) {
         this.data = value
         this.createTable()
     }
@@ -118,9 +173,15 @@ class Table extends action {
             cell.innerHTML = item.name
             cell.className = 'cell'
             cell.setAttribute('key', item.key)
-            cell.addEventListener('click', (event) => {
+            cell.addEventListener('click', (event: MouseEvent | any) => {
                 // 
-            }, false)
+                event.target.style.background = '#f99'
+            }, false);
+            cell.addEventListener('dblclick', (event: MouseEvent | any) => {
+                // 
+                event.target.style.background = ''
+                this.add()
+            }, false);
             const keyArr = item.key.split('-')
             const keyLength = keyArr.length
             this.appendCell(cellCon, cell)

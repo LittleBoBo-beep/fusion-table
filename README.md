@@ -1,7 +1,7 @@
 <!--
  * @Author: chenhaolin
  * @Date: 2021-02-07 16:44:44
- * @LastEditTime: 2021-02-16 20:11:17
+ * @LastEditTime: 2021-02-19 09:33:07
  * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\README.md
@@ -33,4 +33,149 @@
 ```javascript
 import Table form 'ru-merge-cell'
 var table = new Table(container)
+```
+
+## use
+
+```javascript
+const treeData = [
+  {
+    name: "root1",
+    key: "1",
+    children: [
+      {
+        name: "child1",
+        key: "1-1",
+        children: [
+          {
+            name: "child1Child1",
+            key: "1-1-1",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-2",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-3",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-4",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-5",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-6",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-7",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-8",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-9",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-10",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-11",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-12",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-13",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-14",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-15",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-16",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-17",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-18",
+          },
+          {
+            name: "child1Child1",
+            key: "1-1-19",
+          },
+          {
+            name: "child1Child2",
+            key: "1-1-20",
+          },
+          {
+            name: "child1Child3",
+            key: "1-1-21",
+          },
+        ],
+      },
+      {
+        name: "child2",
+        key: "1-2",
+        children: [],
+      },
+    ],
+  },
+  {
+    name: "root2",
+    key: "2",
+    children: [
+      {
+        name: "child3",
+        key: "2-1",
+        children: [
+          {
+            name: "child3child1",
+            key: "2-1-1",
+            children: [],
+          },
+        ],
+      },
+    ],
+  },
+];
+const columns = [
+  {
+    key: 0,
+    title: "column1",
+  },
+  {
+    key: 1,
+    title: "column2",
+  },
+  {
+    key: 2,
+    title: "column3",
+  },
+];
+const options = {
+  container: document.getElementById("container"),
+  data: treeData,
+  columns,
+};
+let table = new Table(options);
 ```
