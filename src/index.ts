@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-02-09 19:47:33
- * @LastEditTime: 2021-02-19 16:55:17
+ * @LastEditTime: 2021-02-19 16:56:08
  * @LastEditors: litter-bobo
  * @Description: In User Settings Edit
  * @FilePath: \tree-table\src\index.ts
@@ -31,8 +31,6 @@
  * 　　　　┗┻┛　┗┻┛+ + + +
  * 
  */
-
-import { domainToUnicode } from "url"
 
 // import action from './action'
 interface options {
