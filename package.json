@@ -4,8 +4,8 @@
   "description": "合并单元格的表格以及操作",
   "main": "dist/main.js",
   "scripts": {
-    "dev": "webpack --mode development --watch",
-    "build": "webpack --mode production",
+    "dev": "webpack --entry ./src/useTable.ts --mode development --watch",
+    "build": "webpack --entry ./src/index.ts --mode production",
     "tsc:start": "tsc --watch",
     "test": ""
   },

@@ -137,9 +137,11 @@ export default class Table extends Model {
      * @description: 根据column设置单元格的长度
      */
     setCellWidth(): void {
-        const width: number = document.querySelectorAll('.column')[0].clientWidth
+        const column: Element = document.querySelectorAll('.column')[0]
+        console.log(window.getComputedStyle(column).width, 'window.getComputedStyle(column)');
+        const width: string = window.getComputedStyle(column).width
         document.querySelectorAll('.cell').forEach((item: any) => {
-            item.style.width = width + 'px'
+            item.style.width = width
         })
     }
 }
