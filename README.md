@@ -1,12 +1,4 @@
 <!--
- * @Author: chenhaolin
- * @Date: 2021-02-07 16:44:44
- * @LastEditTime: 2021-02-19 09:33:07
- * @LastEditors: litter-bobo
- * @Description: In User Settings Edit
- * @FilePath: \tree-table\README.md
--->
-<!--
  *           佛曰:
  *                   写字楼里写字间，写字间里程序员；
  *                   程序人员写程序，又拿程序换酒钱。
@@ -31,13 +23,7 @@
 ## 使用说明
 
 ```javascript
-import Table form 'ru-merge-cell'
-var table = new Table(container)
-```
-
-## use
-
-```javascript
+import Table from './ru-merge-cell'
 const treeData = [
   {
     name: "root1",

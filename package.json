@@ -2,10 +2,12 @@
   "name": "ru-merge-cell",
   "version": "1.0.4",
   "description": "合并单元格的表格以及操作",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack --entry ./src/useTable.ts --mode development --watch",
+    "dev": "webpack --entry ./src/index.ts --mode development --watch",
+    "serve": "http-server src",
     "build": "webpack --entry ./src/index.ts --mode production",
+    "test:build": "webpack --entry ./src/importMain.ts --mode production",
     "tsc:start": "tsc --watch",
     "test": ""
   },
@@ -25,7 +27,10 @@
   "homepage": "https://github.com/LittleBoBo-beep/tree-table#readme",
   "devDependencies": {
     "chai": "^4.3.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.0.2",
+    "http-server": "^0.12.3",
     "mocha": "^8.2.1",
     "ts-loader": "^8.0.17",
     "typescript": "^4.1.5",

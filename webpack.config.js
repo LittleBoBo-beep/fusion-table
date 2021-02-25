@@ -1,7 +1,14 @@
 const path = require('path')
-
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
-    // entry: './src/index.ts',
+    entry: path.resolve(__dirname, 'src/index.js'),
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'index.js',
+        libraryTarget: 'umd',
+        library: 'ru-merge-tree',
+    },
     module: {
         rules: [
             {
@@ -17,10 +24,12 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.ts', '.js', 'css']
+        extensions: ['.ts', '.css']
     },
-    output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, 'dist')
-    }
+    plugins: [
+        // new CopyWebpackPlugin([
+            // {from: './html/index.html'}
+        // ]),
+        new CleanWebpackPlugin()
+    ]
 }
