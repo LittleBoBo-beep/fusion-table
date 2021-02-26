@@ -39,29 +39,40 @@ export default class Model {
      * @param {treeData} item
      */
     renderModel(labelName: string, item: treeData): void {
+        // TODO: 通过数据方式来创建div 递归的方式添加div [{type: div, className: '', content: '', children: [ { ... } ]}]
         const modelContainer: Element = this.createEle('div') // model -> container
-        modelContainer.className = 'model-container'
+        modelContainer.className = 'ru-model-container'
         const model: Element = this.createEle('divs') // model
-        model.className = 'model'
+        model.className = 'ru-model'
         const header: Element = this.createEle('div') // model-header
-        header.className = 'model-header'
+        header.className = 'ru-model-header'
         const body: Element = this.createEle('div') // model-body
-        body.className = 'model-body'
+        body.className = 'ru-model-body'
         const footer: Element = this.createEle('div') // model-footer
-        footer.className = 'model-footer'
+        footer.className = 'ru-model-footer'
+        const footerLeft: Element = this.createEle('div') // model - footer- left
+				footerLeft.className = 'ru-footer-left'
         const addButton: Element = this.createEle('button', '添加') // model -> add -> button
         const deleteButton: Element = this.createEle('button', '删除') // model -> delete -> button
         const changeButton: Element = this.createEle('button', '修改') // model -> delete -> button
+        const footerRight: Element = this.createEle('div') // model - footer- right
+				footerRight.className = 'ru-footer-right'
         const cancelButton: Element = this.createEle('button', '取消') // model -> delete -> button
-        const label: Element = this.createEle('span', labelName) // model -> delete -> button
+				const bodyForm: Element = this.createEle('div') // model-body - form
+				bodyForm.className = 'ru-body-form'
+        const label: Element = this.createEle('span', labelName + ':') // model -> delete -> button
+				label.className = 'ru-body-label'
         const changeInput: Element | any = this.createEle('input') // model -> changeInput -> button
-        this.appendCell(body, label)
-        this.appendCell(body, changeInput)
-        this.appendCell(footer, addButton)
-        this.appendCell(footer, changeButton)
-        this.appendCell(footer, deleteButton)
-        this.appendCell(footer, cancelButton)
-
+        changeInput.type = 'input'
+        this.appendCell(bodyForm, label)
+        this.appendCell(bodyForm, changeInput)
+				this.appendCell(body, bodyForm)
+        this.appendCell(footerLeft, addButton)
+        this.appendCell(footerLeft, changeButton)
+        this.appendCell(footerLeft, deleteButton)
+        this.appendCell(footerRight, cancelButton)
+        this.appendCell(footer, footerLeft)
+				this.appendCell(footer, footerRight)
         this.appendCell(model, header)
         this.appendCell(model, body)
         this.appendCell(model, footer)
@@ -92,7 +103,7 @@ export default class Model {
      * @description: 类弹窗操作
      */
     removeModel(): void {
-        const childNode: any = document.querySelector('.model-container')
+        const childNode: any = document.querySelector('.ru-model-container')
         document.body.removeChild(childNode)
     }
     /**
@@ -116,7 +127,6 @@ export default class Model {
             }
             newData.splice(Number(key[key.length - 1]), 0, addData)
         } else if (type === 'change') {
-            console.log(newData, key, Number(key[key.length - 1]) - 1, 'newData');
             newData[Number(key[key.length - 1]) - 1].name = value
         } else {
             newData.splice(Number(key[key.length - 1]) - 1, 1)

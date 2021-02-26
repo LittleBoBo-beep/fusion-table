@@ -8,24 +8,26 @@ import Model from './Model'
  */
 class Table extends Model {
     private container: HTMLElement // 存放表格的组件
-    private data!: Array<treeData>; // 数据
+    private data!: Array<treeData> // 数据
     private columns: Array<columns> // 表头的数据
     fragment: DocumentFragment
-    set treeData(value: Array<treeData>) {
-        this.data = value
+    set treeData(data: Array<treeData>) {
+        this.data = data
+        this.completeData(data)
         this.createTable()
         this.setCellWidth()
     }
     constructor(options: options) {
         super()
-        console.log(options, 'opitons');
         const { container, data, columns } = options
         this.container = container
         this.columns = columns
         this.fragment = document.createDocumentFragment()
         this.treeData = data
-        this.createTable()
-        this.setCellWidth()
+        // 监听窗口大小的变化，修改cell的大小
+        window.onresize = () => {
+            this.setCellWidth()
+        }
     }
     /**
      * @name: createTable
@@ -34,8 +36,8 @@ class Table extends Model {
     createTable(): void {
         while (this.container.lastChild) this.container.removeChild(this.container.lastChild)
         const tableBody: Element = document.createElement('div')
-        tableBody.className = 'tableBody'
-        this.readData(this.data, tableBody);
+        tableBody.className = 'ru-tableBody'
+        this.readData(this.data, tableBody)
         this.appendCell(this.fragment, this.createColumns())
         this.appendCell(this.fragment, tableBody)
         this.container?.append(this.fragment)
@@ -55,11 +57,11 @@ class Table extends Model {
      */
     createColumns(): Element {
         const columns: Element = document.createElement('div') // 表格的头部
-        columns.className = 'columns'
+        columns.className = 'ru-columns'
         this.columns.forEach((item: columns) => {
             const column: Element = document.createElement('div') // 表格头部的cell
             column.innerHTML = item.title
-            column.className = 'column'
+            column.className = 'ru-column'
             column.setAttribute('key', String(item.key))
             this.appendCell(columns, column)
         })
@@ -84,27 +86,24 @@ class Table extends Model {
         return cells.forEach((item: treeData): void => {
             const cellCon: Element = this.createCell()
             const cell: Element = this.createCell()
-            cellCon.className = 'cellCon'
+            cellCon.className = 'ru-cellCon'
+            if (!item.name || !item.name.trim()) {
+                item.name = '-'
+            }
             cell.innerHTML = item.name
-            cell.className = 'cell'
+            cell.className = 'ru-cell'
             cell.setAttribute('key', item.key)
             const keyArr: Array<string> = item.key.split('-')
             const keyLength: number = keyArr.length
             cell.addEventListener('dblclick', () => {
                 this.renderModel(this.columns[keyLength - 1].title, item)
-            }, false);
+            }, false)
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
                 const childrenCell: Element = this.createCell()
                 this.readData(item.children, childrenCell)
                 this.appendCell(cellCon, childrenCell)
-            } else if (this.columns.length > keyLength) {
-                // 如果不够columns的长度就在后面补零
-                // const childrenCell: HTMLElement = this.createCell()
-                // cells.push({ name: '', key: item.key + '-1' })
-                this.readData([{ name: '', key: item.key + '-1' }], cellCon)
-                // this.appendCell(cellCon, childrenCell)
             }
         })
     }
@@ -112,10 +111,26 @@ class Table extends Model {
      * @description: 根据column设置单元格的长度
      */
     setCellWidth(): void {
-        const column: Element = document.querySelectorAll('.column')[0]
+        const column: Element = document.querySelectorAll('.ru-column')[0]
         const width: string = window.getComputedStyle(column).width
-        document.querySelectorAll('.cell').forEach((item: any) => {
+        document.querySelectorAll('.ru-cell').forEach((item: any) => {
             item.style.width = width
+        })
+    }
+    completeData(data: Array<treeData>): void {
+        data.forEach(item => {
+            const keyArr: Array<string> = item.key.split('-')
+            const keyLength: number = keyArr.length
+            if (keyLength === this.columns.length) return
+            if (!item.children || !item.children.length) {
+                item.children = [
+                    {
+                        name: '',
+                        key: item.key + '-1'
+                    }
+                ]
+            }
+            this.completeData(item.children)
         })
     }
 }
