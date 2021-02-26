@@ -4,9 +4,9 @@
   "description": "合并单元格的表格以及操作",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack --entry ./src/index.ts --mode development --watch",
+    "dev": "webpack --entry ./html/dev.ts --mode development --watch",
     "serve": "http-server src",
-    "build": "webpack --entry ./src/index.ts --mode production",
+    "build": "webpack --mode production",
     "test:build": "webpack --entry ./src/importMain.ts --mode production",
     "tsc:start": "tsc --watch",
     "test": ""

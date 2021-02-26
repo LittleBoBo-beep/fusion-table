@@ -13,13 +13,18 @@ class Table extends Model {
     fragment: DocumentFragment
     set treeData(data: Array<treeData>) {
         this.data = data
-        this.completeData(data)
-        this.createTable()
-        this.setCellWidth()
+        try {
+            this.completeData(data)
+            this.createTable()
+            this.setCellWidth()
+        } catch (error) {
+            throw new Error(error);
+        }
     }
     constructor(options: options) {
         super()
         const { container, data, columns } = options
+        for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
         this.container = container
         this.columns = columns
         this.fragment = document.createDocumentFragment()
@@ -118,20 +123,20 @@ class Table extends Model {
         })
     }
     completeData(data: Array<treeData>): void {
-        data.forEach(item => {
-            const keyArr: Array<string> = item.key.split('-')
-            const keyLength: number = keyArr.length
-            if (keyLength === this.columns.length) return
-            if (!item.children || !item.children.length) {
-                item.children = [
-                    {
-                        name: '',
-                        key: item.key + '-1'
-                    }
-                ]
-            }
-            this.completeData(item.children)
-        })
+            data.forEach(item => {
+                const keyArr: Array<string> = item.key.split('-')
+                const keyLength: number = keyArr.length
+                if (keyLength === this.columns.length) return
+                if (!item.children || !item.children.length) {
+                    item.children = [
+                        {
+                            name: '',
+                            key: item.key + '-1'
+                        }
+                    ]
+                }
+                this.completeData(item.children)
+            })
     }
 }
 export default Table

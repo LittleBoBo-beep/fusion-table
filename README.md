@@ -22,8 +22,15 @@
 
 ## 使用说明
 
+```html
+<!-- 用来包装盒子的容器 -->
+<div id="container"></div>
+```
+
 ```javascript
+// 引入Table Table名字可以自定义
 import Table from './ru-merge-cell'
+// 定义表格单元格的数据
 const treeData = [
   {
     name: "root1",
@@ -144,6 +151,7 @@ const treeData = [
     ],
   },
 ];
+// 定义表格头部的数据
 const columns = [
   {
     key: 0,
@@ -158,10 +166,12 @@ const columns = [
     title: "column3",
   },
 ];
+// 定义所必需的配置项
 const options = {
   container: document.getElementById("container"),
   data: treeData,
   columns,
 };
+// 实例化一个表格
 let table = new Table(options);
 ```
