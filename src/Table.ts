@@ -1,5 +1,4 @@
 import { options, treeData, columns } from './declare'
-import './index.css'
 import Model from './Model'
 /**
  * @name: Table
@@ -19,6 +18,7 @@ class Table extends Model {
     }
     constructor(options: options) {
         super()
+        console.log(options, 'opitons');
         const { container, data, columns } = options
         this.container = container
         this.columns = columns
