@@ -1,6 +1,6 @@
 import Table from '@/Table'
 import '@/index.less'
-
+// import Compile from '@/utils/compile'
 const treeData = [
     {
       name: "root1",
@@ -144,3 +144,8 @@ const treeData = [
   };
   // 实例化一个表格
   let table = new Table(options);
+  // const testReact: any = {
+    // container: document.getElementById('compileCon'),
+    // con: (<div></div>)
+  // }
+// new Compile(testReact)

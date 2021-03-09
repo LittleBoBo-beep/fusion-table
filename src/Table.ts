@@ -1,4 +1,4 @@
-import { options, treeData, columns } from './declare'
+import { TableOptions, treeData, columns } from './declare'
 import Model from './Model'
 /**
  * @name: Table
@@ -21,7 +21,7 @@ class Table extends Model {
             throw new Error(error);
         }
     }
-    constructor(options: options) {
+    constructor(options: TableOptions) {
         super()
         const { container, data, columns } = options
         for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
