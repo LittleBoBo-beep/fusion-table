@@ -1,6 +1,6 @@
 {
   "name": "ru-merge-cell",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "合并单元格的表格以及操作",
   "main": "dist/index.js",
   "scripts": {
