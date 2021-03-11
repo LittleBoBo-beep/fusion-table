@@ -138,5 +138,22 @@ class Table extends Model {
                 this.completeData(item.children)
             })
     }
+    /**
+     * @description: 重新排序key值
+     * @return {*}
+     * @param {Array} data
+     */
+    sortKey (data: Array<treeData>) {
+        let key: number = 1;
+        let preKey: string = ''
+        let newKey: string = data[0].key
+        if (newKey.includes('-')) {
+            preKey = newKey.slice(0, newKey.length - 1)
+        }
+        data.forEach((cellData: treeData) => {
+            cellData.key = preKey + key
+            key++
+        });
+    }
 }
 export default Table

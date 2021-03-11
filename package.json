@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack --entry ./html/dev.ts --mode development --watch",
-    "server": "http-server -c",
+    "server": "http-server -c-1",
     "build": "webpack --mode production",
     "test:build": "webpack --entry ./src/importMain.ts --mode production",
     "tsc:start": "tsc --watch",

@@ -127,10 +127,10 @@ export default class Model {
             }
             newData.splice(Number(key[key.length - 1]), 0, addData)
         } else if (type === 'change') {
-            console.log(newData[Number(key[key.length - 1]) - 1], Number(key[key.length - 1]) - 1);
             newData[Number(key[key.length - 1]) - 1].name = value
         } else {
             newData.splice(Number(key[key.length - 1]) - 1, 1)
         }
+        this.sortKey(newData)
     }
 }
