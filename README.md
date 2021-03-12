@@ -175,3 +175,5 @@ const options = {
 // 实例化一个表格
 let table = new Table(options);
 ```
+
+[avatar](https://github.com/LittleBoBo-beep/tree-table/blob/main/docs/action.gif)
