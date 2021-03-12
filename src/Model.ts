@@ -21,7 +21,7 @@ export default class Model {
      * @param {Node} parentNode
      * @param {Node} childrenNode
      */
-    appendCell(parentNode: Node, childrenNode: Node): void { 
+    appendCell(parentNode: Node, childrenNode: Node): void {
         parentNode.appendChild(childrenNode)
     }
     /**
@@ -51,28 +51,28 @@ export default class Model {
         const footer: Element = this.createEle('div') // model-footer
         footer.className = 'ru-model-footer'
         const footerLeft: Element = this.createEle('div') // model - footer- left
-				footerLeft.className = 'ru-footer-left'
+        footerLeft.className = 'ru-footer-left'
         const addButton: Element = this.createEle('button', '添加') // model -> add -> button
         const deleteButton: Element = this.createEle('button', '删除') // model -> delete -> button
         const changeButton: Element = this.createEle('button', '修改') // model -> delete -> button
         const footerRight: Element = this.createEle('div') // model - footer- right
-				footerRight.className = 'ru-footer-right'
+        footerRight.className = 'ru-footer-right'
         const cancelButton: Element = this.createEle('button', '取消') // model -> delete -> button
-				const bodyForm: Element = this.createEle('div') // model-body - form
-				bodyForm.className = 'ru-body-form'
+        const bodyForm: Element = this.createEle('div') // model-body - form
+        bodyForm.className = 'ru-body-form'
         const label: Element = this.createEle('span', labelName + ':') // model -> delete -> button
-				label.className = 'ru-body-label'
+        label.className = 'ru-body-label'
         const changeInput: Element | any = this.createEle('input') // model -> changeInput -> button
         changeInput.type = 'input'
         this.appendCell(bodyForm, label)
         this.appendCell(bodyForm, changeInput)
-				this.appendCell(body, bodyForm)
+        this.appendCell(body, bodyForm)
         this.appendCell(footerLeft, addButton)
         this.appendCell(footerLeft, changeButton)
         this.appendCell(footerLeft, deleteButton)
         this.appendCell(footerRight, cancelButton)
         this.appendCell(footer, footerLeft)
-				this.appendCell(footer, footerRight)
+        this.appendCell(footer, footerRight)
         this.appendCell(model, header)
         this.appendCell(model, body)
         this.appendCell(model, footer)
@@ -129,7 +129,16 @@ export default class Model {
         } else if (type === 'change') {
             newData[Number(key[key.length - 1]) - 1].name = value
         } else {
-            newData.splice(Number(key[key.length - 1]) - 1, 1)
+            let parentData: any = data
+            for (let i = 0; i < key.length - 1; i++) {
+                const element: number = Number(key[i]);
+                parentData = parentData[element - 1]
+            }
+            if (parentData.children.length <= 1) {
+                throw new Error("无法删除最后一个");
+            } else {
+                newData.splice(Number(key[key.length - 1]) - 1, 1)
+            }
         }
         this.sortKey(newData)
     }
