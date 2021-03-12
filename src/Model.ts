@@ -132,9 +132,9 @@ export default class Model {
             let parentData: any = data
             for (let i = 0; i < key.length - 1; i++) {
                 const element: number = Number(key[i]);
-                parentData = parentData[element - 1]
+                parentData = parentData[element - 1].children
             }
-            if (parentData.children.length <= 1) {
+            if (parentData.length <= 1) {
                 throw new Error("无法删除最后一个");
             } else {
                 newData.splice(Number(key[key.length - 1]) - 1, 1)
