@@ -1,12 +1,13 @@
 import { TableOptions, treeData, columns } from './declare'
-import Model from './Model'
+// import Model from './Model'
+import Additional from './Additional'
 /**
  * @name: Table
  * @description: 生成表格类 
  * @param {*} options { container, data }
  * @return {*} htmlElement Table
  */
-class Table extends Model {
+class Table extends Additional {
     private container: HTMLElement // 存放表格的组件
     private data!: Array<treeData> // 数据
     private columns: Array<columns> // 表头的数据
@@ -24,7 +25,11 @@ class Table extends Model {
     constructor(options: TableOptions) {
         super()
         const { container, data, columns } = options
-        for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
+        // for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
+        // for (const key in options) {
+                // this[key] = options[key]
+        // }
+        // this.options = options
         this.container = container
         this.columns = columns
         this.fragment = document.createDocumentFragment()
@@ -90,19 +95,23 @@ class Table extends Model {
     readData(cells: Array<treeData>, parentNode: Element | DocumentFragment): void {
         return cells.forEach((item: treeData): void => {
             const cellCon: Element = this.createCell()
-            const cell: Element = this.createCell()
             cellCon.className = 'ru-cellCon'
-            if (!item.name || !item.name.trim()) {
-                item.name = '-'
-            }
-            cell.innerHTML = item.name
+            const cell: Element = this.createCell()
             cell.className = 'ru-cell'
             cell.setAttribute('key', item.key)
-            const keyArr: Array<string> = item.key.split('-')
-            const keyLength: number = keyArr.length
-            cell.addEventListener('dblclick', () => {
-                this.renderModel(this.columns[keyLength - 1].title, item)
-            }, false)
+            if (item.type === 'default') {
+                if (!item.name || !item.name.trim()) {
+                    item.name = '-'
+                }
+                cell.innerHTML = item.name
+            } else {
+                this.appendCell(cell, this.renderAdditonal(item))
+            }
+            // const keyArr: Array<string> = item.key.split('-')
+            // const keyLength: number = keyArr.length
+            // this.model && cell.addEventListener('dblclick', () => {
+            //     this.renderModel(this.columns[keyLength - 1].title, item)
+            // }, false)
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
@@ -131,7 +140,8 @@ class Table extends Model {
                     item.children = [
                         {
                             name: '',
-                            key: item.key + '-1'
+                            key: item.key + '-1',
+                            type: 'default'
                         }
                     ]
                 }

@@ -20,7 +20,6 @@
 // ReactDOM.render(jsxProgram(), document.getElementById('compileCon'))
 
 // ReactDOM.render()
-// console.log(React, 'React');
 // const name: string = 'Josh Perez';
 // const element = <h1>Hello, {name}</h1>;
 
