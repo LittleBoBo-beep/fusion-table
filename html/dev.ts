@@ -115,7 +115,7 @@ const treeData = [
           { label: 'Pear', value: 'Pear' },
           { label: 'Orange', value: 'Orange' },
         ],
-        value: ['Apple', 'Pear', 'Orange'],
+        value: [],
         key: "2-1",
         children: [
           {
@@ -148,11 +148,11 @@ const treeData = [
             name: '',
             type: 'input',
             options: {
-              disabled: true,
-              max: 10,
-              min: 5,
+              disabled: false,
+              maxlength: 10,
+              minlength: 5,
             },
-            value: 'name: input',
+            value: '',
             key: '3-1-1'
           }
         ],

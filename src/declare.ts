@@ -7,6 +7,7 @@ export interface treeData {
     name: string
     key: string
     type: string
+    options?: treeDataOptions
     group?: Array<group>
     value?: string
     children?: Array<treeData>
@@ -15,6 +16,12 @@ export interface treeData {
 export interface group {
     value: string
     label: string
+}
+
+export interface treeDataOptions {
+    disabled: boolean,
+    maxlength: string,
+    minlength: string,
 }
 
 export interface columns {
