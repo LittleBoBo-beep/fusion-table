@@ -208,3 +208,5 @@ let table = new Table(options);
 ```
 
 [avatar](https://github.com/LittleBoBo-beep/tree-table/blob/main/docs/action.gif)
+
+![alt 属性文本](./docs/updateView.png)
