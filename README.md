@@ -150,6 +150,37 @@ const treeData = [
       },
     ],
   },
+    {
+    name: "root3",
+    type: 'default',
+    key: "3",
+    children: [
+      {
+        name: "",
+        type: 'select',
+        group: [
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' },
+        ],
+        value: 'Apple',
+        key: "3-1",
+        children: [
+          {
+            name: '',
+            type: 'input',
+            options: {
+              disabled: false,
+              maxlength: 10,
+              minlength: 5,
+            },
+            value: '',
+            key: '3-1-1'
+          }
+        ],
+      },
+    ],
+  },
 ];
 // 定义表格头部的数据
 const columns = [
