@@ -11,13 +11,17 @@ class Table extends Additional {
     private container: HTMLElement // 存放表格的组件
     private data!: Array<treeData> // 数据
     private columns: Array<columns> // 表头的数据
-    fragment: DocumentFragment
+    private fragment: Element
     set treeData(data: Array<treeData>) {
         this.data = data
         try {
-            this.completeData(data)
-            this.createTable()
-            this.setCellWidth()
+            new Promise(resolve => {
+                this.completeData(data)
+                this.createTable()
+                resolve('success')
+            }).then(() => {
+                this.setCellWidth()
+            })
         } catch (error) {
             throw new Error(error);
         }
@@ -32,7 +36,8 @@ class Table extends Additional {
         // this.options = options
         this.container = container
         this.columns = columns
-        this.fragment = document.createDocumentFragment()
+        // this.fragment = document.createDocumentFragment()
+        this.fragment = this.createCell()
         this.treeData = data
         // 监听窗口大小的变化，修改cell的大小
         window.onresize = () => {
@@ -125,7 +130,12 @@ class Table extends Additional {
      * @description: 根据column设置单元格的长度
      */
     setCellWidth(): void {
-        const column: Element = document.querySelectorAll('.ru-column')[0]
+        let column: any
+        if (this.fragment.firstElementChild) {
+            column = this.fragment.firstElementChild.childNodes[0]
+        }
+        // console.log(this.fragment.firstElementChild.childNodes[0], 'this.fragment');
+        // const column: Element = document.querySelectorAll('.ru-column')[0]
         const width: string = window.getComputedStyle(column).width
         document.querySelectorAll('.ru-cell').forEach((item: any) => {
             item.style.width = width
