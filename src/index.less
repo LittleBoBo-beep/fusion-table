@@ -32,13 +32,17 @@ body {
 /* 单个单元格 */
 .ru-cell {
   display: flex;
-  text-align: center;
+  // text-align: center;
   align-items: center;
   justify-content: space-around;
   border: 1px solid #ccc;
   padding: 5px 0;
   overflow: hidden;
   // overflow-wrap: anywhere;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }
 /* 弹窗 */
 .ru-model-container {

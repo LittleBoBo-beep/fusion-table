@@ -31,18 +31,32 @@ class Additional {
      */
     createInput(cell: treeData): Element {
         const input: HTMLInputElement = document.createElement('input');
-        input.type = 'text'
+        input.type = 'number'
         input.className = 'ru-input'
         if (cell.options) {
             input.disabled = cell.options.disabled
             input.setAttribute('maxlength', cell.options.maxlength)
             input.setAttribute('minlength', cell.options.minlength)
+            const value = Number(cell.value)
+            if (value < cell.options.maxinum && value > cell.options.mininum && cell.value) {
+              input.value = cell.value
+            }
         }
-        input.onchange = function () {
-            cell.value = input.value
-        }
-        if (cell.value) {
-            input.value = cell.value
+        input.oninput = function () {
+            const value = Number(input.value)
+            if (!cell.options) {
+                cell.value = input.value
+            } else {
+                if (value >= cell.options.maxinum) {
+                    cell.value = String(cell.options.maxinum)
+                    input.value = cell.value
+                } else if (value <= cell.options.mininum) {
+                    cell.value = String(cell.options.mininum)
+                    input.value = cell.value
+                } else {
+                    cell.value = input.value
+                }
+            }
         }
         return input
     }

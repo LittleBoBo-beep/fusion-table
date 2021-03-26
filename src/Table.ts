@@ -28,13 +28,15 @@ class Table extends Additional {
     }
     constructor(options: TableOptions) {
         super()
+        if (!options.columns.length) {
+            throw new Error("Columns的值为空，表格加载失败");
+        }
         const { container, data, columns } = options
         // for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
         // for (const key in options) {
-                // this[key] = options[key]
+        // this[key] = options[key]
         // }
         // this.options = options
-        if (!columns.length) return
         this.container = container
         this.columns = columns
         // this.fragment = document.createDocumentFragment()
@@ -102,7 +104,7 @@ class Table extends Additional {
         return cells.forEach((item: treeData): void => {
             const cellCon: Element = this.createCell()
             cellCon.className = 'ru-cellCon'
-            const cell: Element = this.createCell()
+            const cell: any = this.createCell()
             cell.className = 'ru-cell'
             cell.setAttribute('key', item.key)
             if (item.type === 'default') {
@@ -110,6 +112,17 @@ class Table extends Additional {
                     item.name = '-'
                 }
                 cell.innerHTML = item.name
+                switch (item.textAlign) {
+                    case 'left':
+                        cell.style['justify-content'] = 'flex-start'
+                        break;
+                    case 'right':
+                        cell.style['justify-content'] = 'flex-end'
+                        break;
+                    case 'center':
+                        cell.style['justify-content'] = 'center'
+                        break;
+                }
             } else {
                 this.appendCell(cell, this.renderAdditonal(item))
             }
@@ -142,28 +155,28 @@ class Table extends Additional {
         })
     }
     completeData(data: Array<treeData>): void {
-            data.forEach(item => {
-                const keyArr: Array<string> = item.key.split('-')
-                const keyLength: number = keyArr.length
-                if (keyLength === this.columns.length) return
-                if (!item.children || !item.children.length) {
-                    item.children = [
-                        {
-                            name: '',
-                            key: item.key + '-1',
-                            type: 'default'
-                        }
-                    ]
-                }
-                this.completeData(item.children)
-            })
+        data.forEach(item => {
+            const keyArr: Array<string> = item.key.split('-')
+            const keyLength: number = keyArr.length
+            if (keyLength === this.columns.length) return
+            if (!item.children || !item.children.length) {
+                item.children = [
+                    {
+                        name: '',
+                        key: item.key + '-1',
+                        type: 'default'
+                    }
+                ]
+            }
+            this.completeData(item.children)
+        })
     }
     /**
      * @description: 重新排序key值
      * @return {*}
      * @param {Array} data
      */
-    sortKey (data: Array<treeData>) {
+    sortKey(data: Array<treeData>) {
         let key: number = 1;
         let preKey: string = ''
         let newKey: string = data[0].key

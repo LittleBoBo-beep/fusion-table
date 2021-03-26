@@ -10,6 +10,7 @@ export interface treeData {
     options?: treeDataOptions
     group?: Array<group>
     value?: string
+    textAlign?: string
     children?: Array<treeData>
 }
 
@@ -22,6 +23,8 @@ export interface treeDataOptions {
     disabled: boolean,
     maxlength: string,
     minlength: string,
+    mininum: number,
+    maxinum: number
 }
 
 export interface columns {

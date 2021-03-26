@@ -4,91 +4,109 @@ import '@/index.less'
 const treeData = [
   {
     name: "root1",
+    textAlign: 'left',
     type: 'default',
     key: "1",
     children: [
       {
         name: "child1",
+        textAlign: 'left',
         type: 'default',
         key: "1-1",
         children: [
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-1",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-2",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-3",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-4",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-5",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-6",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-7",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-8",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-9",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-10",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-11",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-12",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-13",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-14",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-15",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             type: 'default',
             key: "1-1-16",
           }
@@ -96,6 +114,7 @@ const treeData = [
       },
       {
         name: "child2",
+        textAlign: 'left',
         type: 'default',
         key: "1-2",
         children: [],
@@ -104,11 +123,13 @@ const treeData = [
   },
   {
     name: "root2",
+    textAlign: 'center',
     type: 'default',
     key: "2",
     children: [
       {
         name: "",
+        textAlign: 'left',
         type: 'checkbox',
         group: [
           { label: 'Apple', value: 'Apple' },
@@ -120,9 +141,15 @@ const treeData = [
         children: [
           {
             name: '',
+            textAlign: 'left',
             type: 'input',
             value: 'name: input',
-            key: '2-1-1'
+            key: '2-1-1',
+            options: {
+              disabled: false,
+              mininum: 10,
+              maxinum: 20
+            },
           }
         ],
       },
@@ -130,11 +157,13 @@ const treeData = [
   },
   {
     name: "root2",
+    textAlign: 'left',
     type: 'default',
     key: "3",
     children: [
       {
         name: "",
+        textAlign: 'left',
         type: 'select',
         group: [
           { label: 'Apple', value: 'Apple' },
@@ -146,11 +175,14 @@ const treeData = [
         children: [
           {
             name: '',
+            textAlign: 'left',
             type: 'input',
             options: {
               disabled: false,
-              maxlength: 10,
-              minlength: 5,
+              // maxlength: 10,
+              // minlength: 5,
+              mininum: 10,
+              maxinum: 300
             },
             value: '',
             key: '3-1-1'
@@ -184,6 +216,9 @@ const options: any = {
 };
 // 实例化一个表格
 let table = new Table(options);
+console.log(document.getElementById('left'));
+console.log(document.getElementById('center'));
+console.log(document.getElementById('right'));
   // const testReact: any = {
     // container: document.getElementById('compileCon'),
     // con: (<div></div>)
