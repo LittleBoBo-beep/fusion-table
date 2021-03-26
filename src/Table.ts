@@ -34,6 +34,7 @@ class Table extends Additional {
                 // this[key] = options[key]
         // }
         // this.options = options
+        if (!columns.length) return
         this.container = container
         this.columns = columns
         // this.fragment = document.createDocumentFragment()
@@ -134,7 +135,6 @@ class Table extends Additional {
         if (this.fragment.firstElementChild) {
             column = this.fragment.firstElementChild.childNodes[0]
         }
-        // console.log(this.fragment.firstElementChild.childNodes[0], 'this.fragment');
         // const column: Element = document.querySelectorAll('.ru-column')[0]
         const width: string = window.getComputedStyle(column).width
         document.querySelectorAll('.ru-cell').forEach((item: any) => {

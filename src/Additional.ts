@@ -31,15 +31,13 @@ class Additional {
      */
     createInput(cell: treeData): Element {
         const input: HTMLInputElement = document.createElement('input');
-        // input.type = 'input'
+        input.type = 'text'
         input.className = 'ru-input'
-        console.log(cell);
         if (cell.options) {
             input.disabled = cell.options.disabled
             input.setAttribute('maxlength', cell.options.maxlength)
             input.setAttribute('minlength', cell.options.minlength)
         }
-        console.log(input, 'input');
         input.onchange = function () {
             cell.value = input.value
         }
