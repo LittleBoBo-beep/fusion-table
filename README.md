@@ -34,100 +34,124 @@ import Table from './ru-merge-cell'
 const treeData = [
   {
     name: "root1",
+    textAlign: 'left',
     key: "1",
     children: [
       {
         name: "child1",
+        textAlign: 'left',
         key: "1-1",
         children: [
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-1",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-2",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-3",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-4",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-5",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-6",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-7",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-8",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-9",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-10",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-11",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-12",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-13",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-14",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-15",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-16",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-17",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-18",
           },
           {
             name: "child1Child1",
+            textAlign: 'left',
             key: "1-1-19",
           },
           {
             name: "child1Child2",
+            textAlign: 'left',
             key: "1-1-20",
           },
           {
             name: "child1Child3",
+            textAlign: 'left',
             key: "1-1-21",
           },
         ],
       },
       {
         name: "child2",
+        textAlign: 'left',
         key: "1-2",
         children: [],
       },
@@ -135,14 +159,17 @@ const treeData = [
   },
   {
     name: "root2",
+    textAlign: 'left',
     key: "2",
     children: [
       {
         name: "child3",
+        textAlign: 'left',
         key: "2-1",
         children: [
           {
             name: "child3child1",
+            textAlign: 'left',
             key: "2-1-1",
             children: [],
           },
@@ -152,11 +179,13 @@ const treeData = [
   },
     {
     name: "root3",
+    textAlign: 'left',
     type: 'default',
     key: "3",
     children: [
       {
         name: "",
+        textAlign: 'left',
         type: 'select',
         group: [
           { label: 'Apple', value: 'Apple' },
@@ -168,11 +197,14 @@ const treeData = [
         children: [
           {
             name: '',
+            textAlign: 'left',
             type: 'input',
             options: {
               disabled: false,
               maxlength: 10,
               minlength: 5,
+              mininum: 10,
+              maxinum: 20
             },
             value: '',
             key: '3-1-1'
@@ -210,3 +242,6 @@ let table = new Table(options);
 [avatar](https://github.com/LittleBoBo-beep/tree-table/blob/main/docs/action.gif)
 
 ![alt 属性文本](./docs/updateView.png)
+
+添加textAlign改变单元格的字体位置
+添加options.mininum与options.maxinum字段显示大小
