@@ -135,6 +135,9 @@ class Table extends Additional {
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
                 const childrenCell: Element = this.createCell()
+                // if (item.key.split('-').length === this.columns.length - 1) {
+                    childrenCell.className = 'ru-children-cell'
+                // }
                 this.readData(item.children, childrenCell)
                 this.appendCell(cellCon, childrenCell)
             }
@@ -150,7 +153,7 @@ class Table extends Additional {
         }
         // const column: Element = document.querySelectorAll('.ru-column')[0]
         const width: string = window.getComputedStyle(column).width
-        document.querySelectorAll('.ru-cell').forEach((item: any) => {
+        this.fragment.querySelectorAll('.ru-cell').forEach((item: any) => {
             item.style.width = width
         })
     }

@@ -41,6 +41,8 @@ class Additional {
             if (value < cell.options.maxinum && value > cell.options.mininum && cell.value) {
               input.value = cell.value
             }
+        } else {
+            input.value = String(cell.value)
         }
         input.oninput = function () {
             const value = Number(input.value)

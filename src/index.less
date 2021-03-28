@@ -28,6 +28,11 @@ body {
 /* 单元格的container */
 .ru-cellCon {
   display: flex;
+  height: 100%; 
+}
+.ru-children-cell {
+  display: flex;
+  flex-direction: column;
 }
 /* 单个单元格 */
 .ru-cell {
@@ -37,7 +42,8 @@ body {
   justify-content: space-around;
   border: 1px solid #ccc;
   padding: 5px 0;
-  overflow: hidden;
+  // overflow: hidden;
+  word-break: break-all;
   // overflow-wrap: anywhere;
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
