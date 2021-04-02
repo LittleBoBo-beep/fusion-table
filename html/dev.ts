@@ -143,12 +143,12 @@ const treeData = [
             name: '',
             textAlign: 'left',
             type: 'input',
-            value: 'name: input',
+            value: '20',
             key: '2-1-1',
             options: {
               disabled: false,
-              mininum: 10,
-              maxinum: 20
+              minlength: 0,
+              maxlength: 20000
             },
           }
         ],
@@ -179,12 +179,12 @@ const treeData = [
             type: 'input',
             options: {
               disabled: false,
-              // maxlength: 10,
-              // minlength: 5,
-              mininum: 0,
-              maxinum: 100
+              minlength: 0,
+              maxlength: 100,
+              // mininum: 0,
+              // maxinum: 100
             },
-            value: '1',
+            value: '100',
             key: '3-1-1'
           }
         ],

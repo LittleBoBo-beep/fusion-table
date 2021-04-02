@@ -21,8 +21,8 @@ export interface group {
 
 export interface treeDataOptions {
     disabled: boolean,
-    maxlength: string,
-    minlength: string,
+    maxlength: number,
+    minlength: number,
     mininum: number,
     maxinum: number
 }

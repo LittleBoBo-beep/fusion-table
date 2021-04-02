@@ -35,10 +35,10 @@ class Additional {
         input.className = 'ru-input'
         if (cell.options) {
             input.disabled = cell.options.disabled
-            input.setAttribute('maxlength', cell.options.maxlength)
-            input.setAttribute('minlength', cell.options.minlength)
+            // input.setAttribute('maxlength', cell.options.maxlength)
+            // input.setAttribute('minlength', cell.options.minlength)
             const value = Number(cell.value)
-            if (value < cell.options.maxinum && value > cell.options.mininum && cell.value) {
+            if (value <= cell.options.maxlength && value >= cell.options.minlength && cell.value) {
               input.value = cell.value
             }
         } else {
@@ -49,14 +49,19 @@ class Additional {
             if (!cell.options) {
                 cell.value = input.value
             } else {
-                if (value >= cell.options.maxinum) {
-                    cell.value = String(cell.options.maxinum)
+                if (value >= cell.options.maxlength) {
+                    cell.value = String(cell.options.maxlength)
                     input.value = cell.value
-                } else if (value <= cell.options.mininum) {
-                    cell.value = String(cell.options.mininum)
+                } else if (value <= cell.options.minlength) {
+                    cell.value = String(cell.options.minlength)
                     input.value = cell.value
                 } else {
-                    cell.value = input.value
+                    if (input.value[0] === '0') {
+                        input.value = input.value.slice(1)  
+                        cell.value = input.value
+                    } else {
+                        cell.value = input.value
+                    }
                 }
             }
         }
