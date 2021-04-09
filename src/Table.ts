@@ -15,8 +15,11 @@ class Table extends Additional {
     set treeData(data: Array<treeData>) {
         this.data = data
         try {
+            var noData = document.querySelector('.ru-no-data-container')
+            if (noData) {
+                noData.parentElement?.removeChild(noData)
+            }
             new Promise(resolve => {
-                this.completeData(data)
                 this.createTable()
                 resolve('success')
             }).then(() => {
@@ -26,11 +29,21 @@ class Table extends Additional {
             throw new Error(error);
         }
     }
+    set Columns (col: Array<columns>) {
+        this.columns = col
+        // try {
+        //     new Promise(resolve => {
+        //         this.createTable()
+        //         resolve('success')
+        //     }).then(() => {
+        //         this.setCellWidth()
+        //     })
+        // } catch (error) {
+        //     throw new Error(error);
+        // }
+    }
     constructor(options: TableOptions) {
         super()
-        if (!options.columns.length) {
-            throw new Error("Columns的值为空，表格加载失败");
-        }
         const { container, data, columns } = options
         // for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
         // for (const key in options) {
@@ -39,13 +52,24 @@ class Table extends Additional {
         // this.options = options
         this.container = container
         this.columns = columns
-        // this.fragment = document.createDocumentFragment()
-        this.fragment = this.createCell()
-        this.treeData = data
         // 监听窗口大小的变化，修改cell的大小
         window.onresize = () => {
             this.setCellWidth()
         }
+        // this.fragment = document.createDocumentFragment()
+        this.fragment = this.createCell()
+        if(!data.length || !columns.length) {
+            this.noData()
+        } else {
+            this.treeData = data
+        }
+    }
+    noData () {
+        const noDataContainer: Element = this.createCell()
+        noDataContainer.className = 'ru-no-data-container'
+        noDataContainer.innerHTML = '暂无数据'
+        this.appendCell(this.fragment, noDataContainer)
+        this.appendCell(this.container, this.fragment)
     }
     /**
      * @name: createTable
@@ -126,11 +150,6 @@ class Table extends Additional {
             } else {
                 this.appendCell(cell, this.renderAdditonal(item))
             }
-            // const keyArr: Array<string> = item.key.split('-')
-            // const keyLength: number = keyArr.length
-            // this.model && cell.addEventListener('dblclick', () => {
-            //     this.renderModel(this.columns[keyLength - 1].title, item)
-            // }, false)
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
             if (item.children?.length) {
@@ -148,10 +167,11 @@ class Table extends Additional {
      */
     setCellWidth(): void {
         let column: any
-        if (this.fragment.firstElementChild) {
+        if (this.fragment.firstElementChild && this.fragment.firstElementChild.childNodes.length) {
             column = this.fragment.firstElementChild.childNodes[0]
+        } else {
+            return
         }
-        // const column: Element = document.querySelectorAll('.ru-column')[0]
         const width: string = window.getComputedStyle(column).width
         this.fragment.querySelectorAll('.ru-cell').forEach((item: any) => {
             item.style.width = width

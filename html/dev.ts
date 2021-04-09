@@ -210,113 +210,17 @@ const columns = [
 // 定义所必需的配置项
 const options: any = {
   container: document.getElementById("container"),
-  data: treeData,
-  columns,
+  data: [],
+  columns: [],
   model: false
 };
 // 实例化一个表格
 let table = new Table(options);
-  // const testReact: any = {
-    // container: document.getElementById('compileCon'),
-    // con: (<div></div>)
-  // }
-// new Compile(testReact)
-// const treeDataW = [
-//   {
-//     name: "root1",
-//     textAlign: 'left',
-//     type: 'default',
-//     key: "1",
-//     children: [
-//       {
-//         name: "child1",
-//         textAlign: 'left',
-//         type: 'default',
-//         key: "1-1",
-//       },
-//       {
-//         name: "child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2",
-//         textAlign: 'left',
-//         type: 'default',
-//         key: "1-2",
-//         children: [],
-//       },
-//     ],
-//   },
-//   {
-//     name: "root2",
-//     textAlign: 'center',
-//     type: 'default',
-//     key: "2",
-//     children: [
-//       {
-//         name: "",
-//         textAlign: 'left',
-//         type: 'checkbox',
-//         group: [
-//           { label: 'Apple', value: 'Apple' },
-//           { label: 'Pear', value: 'Pear' },
-//           { label: 'Orange', value: 'Orange' },
-//         ],
-//         value: [],
-//         key: "2-1",
-//       },
-//     ],
-//   },
-//   {
-//     name: "root2",
-//     textAlign: 'center',
-//     type: 'default',
-//     key: "3",
-//     children: [
-//       {
-//         name: "",
-//         textAlign: 'left',
-//         type: 'select',
-//         group: [
-//           { label: 'Apple', value: 'Apple' },
-//           { label: 'Pear', value: 'Pear' },
-//           { label: 'Orange', value: 'Orange' },
-//         ],
-//         value: 'Apple',
-//         key: "3-1",
-//       },
-//     ],
-//   },
-// ];
-// // 定义表格头部的数据
-// const columnsW = [
-//   {
-//     key: 0,
-//     title: "column1",
-//   },
-//   {
-//     key: 1,
-//     title: "column2",
-//   }
-// ];
-// // 定义所必需的配置项
-// const optionsW: any = {
-//   container: document.getElementById("containerW"),
-//   data: treeDataW,
-//   columns: columnsW,
-//   model: false
-// };
-// // 实例化一个表格
-// let tableW = new Table(optionsW);
 
-  // document.getElementById('checkout_one')?.onclick = function () {
-  //   if (document.getElementById('container')?.style.display === 'none') {
-  //     document.getElementById('container')?.style.display = 'block'
-  //   } else {
-  //     document.getElementById('container')?.style.display = 'none'
-  //   }
-  // }
-
-  // document.getElementById('checkout_two')?.onclick = function () {
-  //   if (document.getElementById('containerW')?.style.display === 'none') {
-  //     document.getElementById('containerW')?.style.display = 'block'
-  //   } else {
-  //     document.getElementById('containerW')?.style.display = 'none'
-  //   }
-  // }
+const checkout_Data_btn = document.getElementById('checkout_data')
+if (checkout_Data_btn) {
+  checkout_Data_btn.onclick = function () {
+    table.columns = columns
+    table.treeData = treeData
+  }
+}
