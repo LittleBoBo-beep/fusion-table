@@ -8,16 +8,16 @@ import Additional from './Additional'
  * @return {*} htmlElement Table
  */
 class Table extends Additional {
-    private container: HTMLElement // 存放表格的组件
-    private data!: Array<treeData> // 数据
-    private columns: Array<columns> // 表头的数据
-    private fragment: Element
+    container: HTMLElement // 存放表格的组件
+    data!: Array<treeData> // 数据
+    columns: Array<columns> // 表头的数据
+    fragment: Element
+    noDataContainer!: Element
     set treeData(data: Array<treeData>) {
         this.data = data
         try {
-            var noData = document.querySelector('.ru-no-data-container')
-            if (noData) {
-                noData.parentElement?.removeChild(noData)
+            if (this.noDataContainer) {
+                this.noDataContainer.parentElement?.removeChild(this.noDataContainer)
             }
             new Promise(resolve => {
                 this.createTable()
@@ -28,19 +28,6 @@ class Table extends Additional {
         } catch (error) {
             throw new Error(error);
         }
-    }
-    set Columns (col: Array<columns>) {
-        this.columns = col
-        // try {
-        //     new Promise(resolve => {
-        //         this.createTable()
-        //         resolve('success')
-        //     }).then(() => {
-        //         this.setCellWidth()
-        //     })
-        // } catch (error) {
-        //     throw new Error(error);
-        // }
     }
     constructor(options: TableOptions) {
         super()
@@ -58,16 +45,17 @@ class Table extends Additional {
         }
         // this.fragment = document.createDocumentFragment()
         this.fragment = this.createCell()
-        if(!data.length || !columns.length) {
+        if (!data.length || !columns.length) {
             this.noData()
         } else {
             this.treeData = data
         }
     }
-    noData () {
+    noData() {
         const noDataContainer: Element = this.createCell()
-        noDataContainer.className = 'ru-no-data-container'
-        noDataContainer.innerHTML = '暂无数据'
+        noDataContainer!.className = 'ru-no-data-container'
+        noDataContainer!.innerHTML = '暂无数据'
+        this.noDataContainer! = noDataContainer
         this.appendCell(this.fragment, noDataContainer)
         this.appendCell(this.container, this.fragment)
     }
@@ -155,7 +143,7 @@ class Table extends Additional {
             if (item.children?.length) {
                 const childrenCell: Element = this.createCell()
                 // if (item.key.split('-').length === this.columns.length - 1) {
-                    childrenCell.className = 'ru-children-cell'
+                childrenCell.className = 'ru-children-cell'
                 // }
                 this.readData(item.children, childrenCell)
                 this.appendCell(cellCon, childrenCell)

@@ -56,7 +56,7 @@ class Additional {
                     cell.value = String(cell.options.minlength)
                     input.value = cell.value
                 } else {
-                    if (input.value[0] === '0') {
+                    if (input.value[0] === '0' && !input.value.includes('0.')) {
                         input.value = input.value.slice(1)  
                         cell.value = input.value
                     } else {

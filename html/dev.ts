@@ -210,8 +210,8 @@ const columns = [
 // 定义所必需的配置项
 const options: any = {
   container: document.getElementById("container"),
-  data: [],
-  columns: [],
+  data: treeData,
+  columns,
   model: false
 };
 // 实例化一个表格
@@ -220,7 +220,7 @@ let table = new Table(options);
 const checkout_Data_btn = document.getElementById('checkout_data')
 if (checkout_Data_btn) {
   checkout_Data_btn.onclick = function () {
-    table.columns = columns
-    table.treeData = treeData
+    // table.columns = columns
+    // table.treeData = treeData
   }
 }
