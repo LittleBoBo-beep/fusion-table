@@ -65,6 +65,7 @@ class Table extends Additional {
      */
     createTable(): void {
         while (this.container.lastChild) this.container.removeChild(this.container.lastChild)
+        while (this.fragment.lastChild) this.fragment.removeChild(this.fragment.lastChild)
         const tableBody: Element = document.createElement('div')
         tableBody.className = 'ru-tableBody'
         this.readData(this.data, tableBody)

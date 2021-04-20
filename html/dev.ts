@@ -222,5 +222,8 @@ if (checkout_Data_btn) {
   checkout_Data_btn.onclick = function () {
     // table.columns = columns
     // table.treeData = treeData
+    new Table(options);
+    new Table(options);
+    new Table(options);
   }
 }
