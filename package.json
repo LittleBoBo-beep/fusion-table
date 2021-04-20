@@ -1,7 +1,7 @@
 {
   "name": "ru-merge-cell",
   "version": "1.0.11",
-  "description": "合并单元格的表格以及操作",
+  "description": "fusion-table",
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack --entry ./html/dev.ts --mode development --watch",
