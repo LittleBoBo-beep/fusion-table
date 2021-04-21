@@ -1,6 +1,6 @@
 {
   "name": "fusion-cell",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "fusion-table",
   "main": "dist/index.js",
   "scripts": {
