@@ -33,6 +33,7 @@ class Additional {
         const input: HTMLInputElement = document.createElement('input');
         input.type = 'number'
         input.className = 'ru-input'
+        if (cell.placeholder) input.placeholder = cell.placeholder
         if (cell.options) {
             input.disabled = cell.options.disabled
             // input.setAttribute('maxlength', cell.options.maxlength)

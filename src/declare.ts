@@ -12,6 +12,7 @@ export interface treeData {
     value?: string
     textAlign?: string
     children?: Array<treeData>
+    placeholder?: string
 }
 
 export interface group {

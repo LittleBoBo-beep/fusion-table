@@ -143,6 +143,7 @@ const treeData = [
             name: '',
             textAlign: 'left',
             type: 'input',
+            placeholder: '请输入数字',
             value: '20',
             key: '2-1-1',
             options: {
@@ -177,6 +178,7 @@ const treeData = [
             name: '',
             textAlign: 'left',
             type: 'input',
+            placeholder: 'i love y',
             options: {
               disabled: false,
               minlength: 0,
@@ -184,7 +186,7 @@ const treeData = [
               // mininum: 0,
               // maxinum: 100
             },
-            value: '100',
+            value: '',
             key: '3-1-1'
           }
         ],
