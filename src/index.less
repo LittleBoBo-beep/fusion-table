@@ -1,169 +1,173 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-/* 表头container */
-.ru-columns {
-  display: flex;
-}
-/* 表头 */
-.ru-column {
-  background: #eee;
-  flex: 1;
-  text-align: center;
-  border: 1px solid #ccc;
-  padding: 10px 0;
-}
-/* 表格table */
-.ru-tableBody {
-  display: flex;
-  flex-direction: column;
-}
-/* 单元格的container */
-.ru-cellCon {
-  display: flex;
-}
-/* 单个单元格 */
-.ru-cell {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px solid #ccc;
-  padding: 5px 0;
-}
-/* 弹窗 */
-.ru-model-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* 模态对话框 */
-.ru-model {
-  width: 500px;
-  background: #fff;
-  border-radius: 4px;
-}
-/* 对话框头部 */
-.ru-model-header {
-  height: 50px;
-  border-bottom: 1px solid #e8e8e8;
-}
-/* 对话框body */
-.ru-model-body {
-  height: 100px;
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
-  .ru-body-form {
-    display: flex;
-    align-items: center;
-    margin-left: 7%;
-    .ru-body-label {
-      padding: 0 5px;
-    }
-    input {
-      box-sizing: border-box;
-      margin: 0;
-      font-variant: tabular-nums;
-      list-style: none;
-      font-feature-settings: "tnum";
-      position: relative;
-      display: inline-block;
-      //   width: 100%;
-      height: 32px;
-      padding: 4px 11px;
-      color: rgba(0, 0, 0, 0.65);
-      font-size: 14px;
-      line-height: 1.5;
-      background-color: #fff;
-      background-image: none;
-      border: 1px solid #d9d9d9;
-      border-radius: 4px;
-      transition: all 0.3s;
-    }
-  }
-}
-/* 对话框footer */
-.ru-model-footer {
-  height: 53px;
-  border-top: 1px solid #e8e8e8;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  .ru-footer-left {
-    button {
-      color: #fff;
-      background-color: #1890ff;
-      border-color: #1890ff;
-    }
-  }
-  .ru-footer-right {
-    button {
-      line-height: 1.499;
-      position: relative;
-      display: inline-block;
-      font-weight: 400;
-      white-space: nowrap;
-      text-align: center;
-      background-image: none;
-      box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      touch-action: manipulation;
-      height: 32px;
-      padding: 0 15px;
-      font-size: 14px;
-      border-radius: 4px;
-      color: rgba(0, 0, 0, 0.65);
-      background-color: #fff;
-      border: 1px solid #d9d9d9;
-    }
-  }
-}
-/* 对话框footer */
-.ru-model-footer button {
-  line-height: 1.499;
-  position: relative;
-  display: inline-block;
-  font-weight: 400;
-  white-space: nowrap;
-  text-align: center;
-  background-image: none;
-  box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
-  height: 32px;
-  padding: 0 15px;
-  font-size: 14px;
-  border-radius: 4px;
-  color: rgba(0, 0, 0, 0.65);
-  background-color: #fff;
-  border: 1px solid #d9d9d9;
-  margin: 0 10px;
-  &:focus {
-    outline: 0;
-  }
-}
+@import url('./less/cell.less');
+@import url('./less/columns.less');
+@import url('./less/body.less');
+@import url('./less/table.less');
+// * {
+//   margin: 0;
+//   padding: 0;
+//   box-sizing: border-box;
+// }
+// html,
+// body {
+//   width: 100%;
+//   height: 100%;
+// }
+// /* 表头container */
+// .ru-columns {
+//   display: flex;
+// }
+// /* 表头 */
+// .ru-column {
+//   background: #eee;
+//   flex: 1;
+//   text-align: center;
+//   border: 1px solid #ccc;
+//   padding: 10px 0;
+// }
+// /* 表格table */
+// .ru-tableBody {
+//   display: flex;
+//   flex-direction: column;
+// }
+// /* 单元格的container */
+// .ru-cellCon {
+//   display: flex;
+// }
+// /* 单个单元格 */
+// .ru-cell {
+//   display: flex;
+//   text-align: center;
+//   align-items: center;
+//   justify-content: space-around;
+//   border: 1px solid #ccc;
+//   padding: 5px 0;
+// }
+// /* 弹窗 */
+// .ru-model-container {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+// /* 模态对话框 */
+// .ru-model {
+//   width: 500px;
+//   background: #fff;
+//   border-radius: 4px;
+// }
+// /* 对话框头部 */
+// .ru-model-header {
+//   height: 50px;
+//   border-bottom: 1px solid #e8e8e8;
+// }
+// /* 对话框body */
+// .ru-model-body {
+//   height: 100px;
+//   align-items: center;
+//   display: flex;
+//   justify-content: flex-start;
+//   .ru-body-form {
+//     display: flex;
+//     align-items: center;
+//     margin-left: 7%;
+//     .ru-body-label {
+//       padding: 0 5px;
+//     }
+//     input {
+//       box-sizing: border-box;
+//       margin: 0;
+//       font-variant: tabular-nums;
+//       list-style: none;
+//       font-feature-settings: "tnum";
+//       position: relative;
+//       display: inline-block;
+//       //   width: 100%;
+//       height: 32px;
+//       padding: 4px 11px;
+//       color: rgba(0, 0, 0, 0.65);
+//       font-size: 14px;
+//       line-height: 1.5;
+//       background-color: #fff;
+//       background-image: none;
+//       border: 1px solid #d9d9d9;
+//       border-radius: 4px;
+//       transition: all 0.3s;
+//     }
+//   }
+// }
+// /* 对话框footer */
+// .ru-model-footer {
+//   height: 53px;
+//   border-top: 1px solid #e8e8e8;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 0 10px;
+//   .ru-footer-left {
+//     button {
+//       color: #fff;
+//       background-color: #1890ff;
+//       border-color: #1890ff;
+//     }
+//   }
+//   .ru-footer-right {
+//     button {
+//       line-height: 1.499;
+//       position: relative;
+//       display: inline-block;
+//       font-weight: 400;
+//       white-space: nowrap;
+//       text-align: center;
+//       background-image: none;
+//       box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+//       cursor: pointer;
+//       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+//       -webkit-user-select: none;
+//       -moz-user-select: none;
+//       -ms-user-select: none;
+//       user-select: none;
+//       touch-action: manipulation;
+//       height: 32px;
+//       padding: 0 15px;
+//       font-size: 14px;
+//       border-radius: 4px;
+//       color: rgba(0, 0, 0, 0.65);
+//       background-color: #fff;
+//       border: 1px solid #d9d9d9;
+//     }
+//   }
+// }
+// /* 对话框footer */
+// .ru-model-footer button {
+//   line-height: 1.499;
+//   position: relative;
+//   display: inline-block;
+//   font-weight: 400;
+//   white-space: nowrap;
+//   text-align: center;
+//   background-image: none;
+//   box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+//   cursor: pointer;
+//   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+//   touch-action: manipulation;
+//   height: 32px;
+//   padding: 0 15px;
+//   font-size: 14px;
+//   border-radius: 4px;
+//   color: rgba(0, 0, 0, 0.65);
+//   background-color: #fff;
+//   border: 1px solid #d9d9d9;
+//   margin: 0 10px;
+//   &:focus {
+//     outline: 0;
+//   }
+// }
