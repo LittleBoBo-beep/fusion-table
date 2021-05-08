@@ -105,11 +105,41 @@ const treeData = [
             key: "1-1-15",
           },
           {
-            name: "child1Child1",
+            name: "",
             textAlign: 'left',
-            type: 'default',
+            type: 'radio',
+            group: [
+              { label: 'Apple', value: 'Apple' },
+              { label: 'Pear', value: 'Pear' },
+              { label: 'Orange', value: 'Orange' },
+            ],
+            value: [],
             key: "1-1-16",
-          }
+          },
+          {
+            name: "",
+            textAlign: 'left',
+            type: 'radio',
+            group: [
+              { label: 'Apple', value: 'Apple' },
+              { label: 'Pear', value: 'Pear' },
+              { label: 'Orange', value: 'Orange' },
+            ],
+            value: [],
+            key: "1-1-17",
+          },
+          {
+            name: "",
+            textAlign: 'left',
+            type: 'radio',
+            group: [
+              { label: 'Apple', value: 'Apple' },
+              { label: 'Pear', value: 'Pear' },
+              { label: 'Orange', value: 'Orange' },
+            ],
+            value: [],
+            key: "1-1-18",
+          },
         ],
       },
       {
@@ -154,6 +184,30 @@ const treeData = [
           }
         ],
       },
+      {
+        name: "",
+        textAlign: 'left',
+        type: 'checkbox',
+        group: [
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' },
+        ],
+        value: [],
+        key: "2-2",
+      },
+      {
+        name: "",
+        textAlign: 'left',
+        type: 'checkbox',
+        group: [
+          { label: 'Apple', value: 'Apple' },
+          { label: 'Pear', value: 'Pear' },
+          { label: 'Orange', value: 'Orange' },
+        ],
+        value: [],
+        key: "2-3",
+      }
     ],
   },
   {
