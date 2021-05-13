@@ -9,15 +9,21 @@ import Additional from './Additional'
  */
 class Table extends Additional {
     container: HTMLElement // 存放表格的组件
-    data!: Array<treeData> // 数据
+    data: Array<treeData> // 数据
     columns: Array<columns> // 表头的数据
-    fragment: Element
+    private fragment: Element
     noDataContainer!: Element
     set treeData(data: Array<treeData>) {
         this.data = data
         try {
             if (this.noDataContainer) {
                 this.noDataContainer.parentElement?.removeChild(this.noDataContainer)
+            }
+            if (document.querySelectorAll('.ru-no-data-container')) {
+                const noDataContainer = document.querySelectorAll('.ru-no-data-container')
+                for (let index = 0; index < noDataContainer.length; index++) {
+                    noDataContainer[index].parentNode?.removeChild(noDataContainer[index])
+                }
             }
             new Promise(resolve => {
                 this.createTable()
@@ -39,6 +45,7 @@ class Table extends Additional {
         // this.options = options
         this.container = container
         this.columns = columns
+        this.data = data
         // 监听窗口大小的变化，修改cell的大小
         window.onresize = () => {
             this.setCellWidth()

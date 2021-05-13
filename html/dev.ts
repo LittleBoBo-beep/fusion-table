@@ -266,7 +266,8 @@ const columns = [
 // 定义所必需的配置项
 const options: any = {
   container: document.getElementById("container"),
-  data: treeData,
+  // data: treeData,
+  data: [],
   columns,
   model: false
 };
@@ -276,10 +277,25 @@ let table = new Table(options);
 const checkout_Data_btn = document.getElementById('checkout_data')
 if (checkout_Data_btn) {
   checkout_Data_btn.onclick = function () {
-    // table.columns = columns
-    // table.treeData = treeData
-    new Table(options);
-    new Table(options);
-    new Table(options);
+    // console.log(table, 'table');
+    // const op = {
+    //   container: document.getElementById("container"),
+    //   data: treeData,
+    //   columns,
+    //   model: false
+    // }
+    // if (table.data.length) {
+    // options.data = []
+    // } else {
+    //   table
+    // }
+    if (options.data.length) {
+      options.data = []
+      new Table(options);
+    } else {
+      options.data = treeData
+      new Table(options);
+    }
+    // new Table(options);
   }
 }
