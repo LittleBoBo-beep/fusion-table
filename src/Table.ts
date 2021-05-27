@@ -9,22 +9,13 @@ import Additional from './Additional'
  */
 class Table extends Additional {
     container: HTMLElement // 存放表格的组件
-    data: Array<treeData> // 数据
+    data!: Array<treeData> // 数据
     columns: Array<columns> // 表头的数据
-    private fragment: Element
+    private fragment: DocumentFragment // fragment
     noDataContainer!: Element
     set treeData(data: Array<treeData>) {
         this.data = data
         try {
-            if (this.noDataContainer) {
-                this.noDataContainer.parentElement?.removeChild(this.noDataContainer)
-            }
-            if (document.querySelectorAll('.ru-no-data-container')) {
-                const noDataContainer = document.querySelectorAll('.ru-no-data-container')
-                for (let index = 0; index < noDataContainer.length; index++) {
-                    noDataContainer[index].parentNode?.removeChild(noDataContainer[index])
-                }
-            }
             new Promise(resolve => {
                 this.createTable()
                 resolve('success')
@@ -40,31 +31,38 @@ class Table extends Additional {
         const { container, data, columns } = options
         // for (const key in options) if (!Object.prototype.hasOwnProperty.call(options, key)) throw new Error(`${key}是一个必须项哦~~`);
         // for (const key in options) {
-        // this[key] = options[key]
-        // }
-        // this.options = options
+            // this[key] = options[key]
+            // }
+            // this.options = options
         this.container = container
+        this.clearContainer()
         this.columns = columns
-        this.data = data
+        this.fragment = document.createDocumentFragment()
+        if (data instanceof Array) {
+            if (data.length) {
+                this.treeData = data
+            } else {
+                this.noData()
+            }
+        }
         // 监听窗口大小的变化，修改cell的大小
         window.onresize = () => {
             this.setCellWidth()
         }
-        // this.fragment = document.createDocumentFragment()
-        this.fragment = this.createCell()
-        if (!data.length || !columns.length) {
-            this.noData()
-        } else {
-            this.treeData = data
-        }
     }
     noData() {
         const noDataContainer: Element = this.createCell()
-        noDataContainer!.className = 'ru-no-data-container'
-        noDataContainer!.innerHTML = '暂无数据'
-        this.noDataContainer! = noDataContainer
+        noDataContainer.className = 'ru-no-data-container'
+        noDataContainer.innerHTML = '暂无数据'
+        this.noDataContainer = noDataContainer
         this.appendCell(this.fragment, noDataContainer)
         this.appendCell(this.container, this.fragment)
+    }
+    /**
+     * clear Container
+     */
+     clearContainer() {
+        while (this.container.lastChild) this.container.removeChild(this.container.lastChild)
     }
     /**
      * @name: createTable
@@ -72,13 +70,12 @@ class Table extends Additional {
      */
     createTable(): void {
         while (this.container.lastChild) this.container.removeChild(this.container.lastChild)
-        while (this.fragment.lastChild) this.fragment.removeChild(this.fragment.lastChild)
         const tableBody: Element = document.createElement('div')
         tableBody.className = 'ru-tableBody'
         this.readData(this.data, tableBody)
         this.appendCell(this.fragment, this.createColumns())
         this.appendCell(this.fragment, tableBody)
-        this.container?.append(this.fragment)
+        this.appendCell(this.container, this.fragment)
     }
     /**
      * @description: 创建单元格
@@ -162,14 +159,11 @@ class Table extends Additional {
      * @description: 根据column设置单元格的长度
      */
     setCellWidth(): void {
+        if (!this.columns.length) return
         let column: any
-        if (this.fragment.firstElementChild && this.fragment.firstElementChild.childNodes.length) {
-            column = this.fragment.firstElementChild.childNodes[0]
-        } else {
-            return
-        }
+        column = this.container?.firstChild?.childNodes[0]
         const width: string = window.getComputedStyle(column).width
-        this.fragment.querySelectorAll('.ru-cell').forEach((item: any) => {
+        this.container.querySelectorAll('.ru-cell').forEach((item: any) => {
             item.style.width = width
         })
     }

@@ -7,25 +7,15 @@ function resolve(pathname) {
     return path.resolve(__dirname, pathname)
 }
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const environment = process.env.NODE_ENV
-let mode, entryPath
-if (environment === "production") {
-    entryPath = 'src/index.ts'
-    mode = environment
-} else {
-    entryPath = 'src/dev.ts'
-    mode = 'development'
-}
 module.exports = {
-    entry: resolve(entryPath),
+    entry: resolve("src/index.ts"),
     output: {
         path: resolve('dist'),
         filename: 'index.js',
         libraryTarget: 'umd',
         library: 'ru-merge-tree',
     },
-    mode,
+    mode: "production",
     module: {
         rules: [
             {
@@ -42,22 +32,8 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.js', '.less', '.css'],
-        alias: {
-            '@': resolve('./src/'),
-        },
     },
     plugins: [
-        // new CopyWebpackPlugin([
-        // {from: './html/index.html'}
-        // ]),
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         { from: "./html/index.html" }
-        //     ],
-        // }),
-        new htmlWebpackPlugin({
-            template: resolve('./public/index.html')
-        }),
         new CleanWebpackPlugin(),
         // new UglifyJsPlugin({
         //     uglifyOptions: {
@@ -70,13 +46,5 @@ module.exports = {
         //         }
         //     }
         // })
-    ],
-    devServer: {
-        contentBase: resolve('plulic'),
-        open: true,
-        hot: true,
-        hotOnly: true,
-        port: 8080,
-        host: "127.0.0.1"
-    }
+    ]
 }
