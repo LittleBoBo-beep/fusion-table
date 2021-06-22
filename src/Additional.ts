@@ -8,25 +8,25 @@ class Additional {
      * @return {Element} div
      * @param {treeData} cell
      */
-    renderAdditonal(cell: treeData): Element {
-        let AdditonCell: Element = document.createElement('div')
-        switch (cell.type) {
+    renderAdditional(cell: treeData): Element {
+        let AdditionCell: Element
+      switch (cell.type) {
             case 'radio':
             case 'checkbox':
-                AdditonCell = this.createGroup(cell)
+                AdditionCell = this.createGroup(cell)
                 break;
             case 'select':
-                AdditonCell = this.createSelect(cell)
+                AdditionCell = this.createSelect(cell)
                 break;
             default:
-                AdditonCell = this.createInput(cell)
+                AdditionCell = this.createInput(cell)
                 break;
         }
-        return AdditonCell
+        return AdditionCell
     }
     /**
      * @description: 生成input
-     * @return {Input} input
+     * @return {HTMLInputElement} input
      * @param {treeData} cell
      */
     createInput(cell: treeData): Element {
@@ -58,7 +58,7 @@ class Additional {
                     input.value = cell.value
                 } else {
                     if (input.value[0] === '0' && !input.value.includes('0.')) {
-                        input.value = input.value.slice(1)  
+                        input.value = input.value.slice(1)
                         cell.value = input.value
                     } else {
                         cell.value = input.value

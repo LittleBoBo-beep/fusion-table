@@ -24,8 +24,8 @@ export interface treeDataOptions {
     disabled: boolean,
     maxlength: number,
     minlength: number,
-    mininum: number,
-    maxinum: number
+    minimum: number,
+    maximum: number
 }
 
 export interface columns {
@@ -33,6 +33,6 @@ export interface columns {
     title: string
 }
 
-export interface RuReactOptions {
-    container: HTMLElement
-}
+// export interface RuReactOptions {
+//     container: HTMLElement
+// }

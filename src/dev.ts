@@ -270,7 +270,7 @@ const options: any = {
     model: false
 };
 // 实例化一个表格
-let table = new Table(options);
+new Table(options);
 const button1: HTMLElement = document.createElement('button')
 document.body.appendChild(button1)
 button1.innerHTML = 'btn1'

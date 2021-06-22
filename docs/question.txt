@@ -22,3 +22,5 @@ bug： 现象-修改添加的cell的时候变为最底部添加cell
 
 6. 修改样式
 通过查看UI库的table找例子修改，调节成为可更换样式的table
+
+7. update

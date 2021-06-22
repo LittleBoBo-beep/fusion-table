@@ -3,7 +3,7 @@ import { TableOptions, treeData, columns } from './declare'
 import Additional from './Additional'
 /**
  * @name: Table
- * @description: 生成表格类 
+ * @description: 生成表格类
  * @param {*} options { container, data }
  * @return {*} htmlElement Table
  */
@@ -11,7 +11,7 @@ class Table extends Additional {
     container: HTMLElement // 存放表格的组件
     data!: Array<treeData> // 数据
     columns: Array<columns> // 表头的数据
-    private fragment: DocumentFragment // fragment
+    private readonly fragment: DocumentFragment // fragment
     noDataContainer!: Element
     set treeData(data: Array<treeData>) {
         this.data = data
@@ -38,13 +38,11 @@ class Table extends Additional {
         this.clearContainer()
         this.columns = columns
         this.fragment = document.createDocumentFragment()
-        if (data instanceof Array) {
-            if (data.length) {
-                this.treeData = data
-            } else {
-                this.noData()
-            }
-        }
+      if (data.length) {
+        this.treeData = data
+      } else {
+        this.noData()
+      }
         // 监听窗口大小的变化，修改cell的大小
         window.onresize = () => {
             this.setCellWidth()
@@ -141,7 +139,7 @@ class Table extends Additional {
                         break;
                 }
             } else {
-                this.appendCell(cell, this.renderAdditonal(item))
+                this.appendCell(cell, this.renderAdditional(item))
             }
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)

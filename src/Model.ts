@@ -80,17 +80,17 @@ export default class Model {
         const { key } = item
         const keyArr: Array<string> = key.split("-")
         this.addEvent(addButton, 'click', (): void => { // 添加
-            this.changetreeData('add', keyArr, this.data, changeInput.value)
+            this.changerData('add', keyArr, this.data, changeInput.value)
             this.treeData = this.data
             this.removeModel()
         })
         this.addEvent(changeButton, 'click', (): void => { // 修改
-            this.changetreeData('change', keyArr, this.data, changeInput.value)
+            this.changerData('change', keyArr, this.data, changeInput.value)
             this.treeData = this.data
             this.removeModel()
         })
         this.addEvent(deleteButton, 'click', (): void => { // 删除
-            this.changetreeData('delete', keyArr, this.data, changeInput.value)
+            this.changerData('delete', keyArr, this.data, changeInput.value)
             this.treeData = this.data
             this.removeModel()
         })
@@ -113,7 +113,7 @@ export default class Model {
      * @param {Array} data
      * @param {string} value
      */
-    changetreeData(type: string, key: Array<string>, data: Array<treeData>, value: string): void {
+    changerData(type: string, key: Array<string>, data: Array<treeData>, value: string): void {
         let newData: any = data
         for (let i = 0; i < key.length - 1; i++) {
             newData = newData[Number(key[i]) - 1].children
