@@ -433,6 +433,18 @@ const columns = [
         key: 2,
         title: "column3",
     },
+    {
+        key: 3,
+        title: "column1",
+    },
+    {
+        key: 4,
+        title: "column2",
+    },
+    {
+        key: 5,
+        title: "column3",
+    },
 ];
 // 定义所必需的配置项
 const options: any = {

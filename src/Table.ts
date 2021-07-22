@@ -142,10 +142,30 @@ class Table extends Additional {
             } else {
                 const element: any = this.renderAdditional(item)
                 if (element.nodeName === 'BUTTON') {
-                    element.onclick = () => {
-                        if (item.events && item.events.onClick) {
-                            const options: any = item.events.onClick() || {}
-                            const { action: actionType = 'add', type: cellType = 'input' } = options
+                        element.onclick = () => {
+                            // todo: 点击对应的添加按钮之后获取不到对应的key值
+                            // 现象：比如在第三列有一个children中有三项，点击中间的添加按钮之后添加对应的数据，再次点击这组数据中的最後一项的添加按钮添加数据错误，原因：获取key值错误
+                            console.log("item;", item.key);
+                            // if (item.events && item.events.onClick) {
+                            //     const options: any = item.events.onClick() || {}
+                            //     const { action: actionType = 'add', type: cellType = 'textarea' } = options
+                            //     let { mergeColumn = 2 } = options
+                            //     mergeColumn += 1
+                            //     if (mergeColumn > this.columns.length) {
+                            //         mergeColumn = this.columns.length - 1
+                            //     }
+                            //     let keyArr: Array<string> = [];
+                            //     for (let i = 0; i < mergeColumn; i++) {
+                            //         keyArr.push(item.key.split('-')[i])
+                            //     }
+                            //     const key: string = keyArr.join('-');
+                            //     this.actionLineButtonEvent(key, actionType, cellType)
+                            // }
+                            let options: any = {}
+                            if (item.events && item.events.onClick) {
+                                options = item.events.onClick() || {}
+                            }
+                            const { action: actionType = 'add', type: cellType = 'textarea' } = options
                             let { mergeColumn = 2 } = options
                             mergeColumn += 1
                             if (mergeColumn > this.columns.length) {
@@ -158,7 +178,6 @@ class Table extends Additional {
                             const key: string = keyArr.join('-');
                             this.actionLineButtonEvent(key, actionType, cellType)
                         }
-                    }
                 }
                 this.appendCell(cell, element)
             }
@@ -192,11 +211,19 @@ class Table extends Additional {
             const keyLength: number = keyArr.length
             if (keyLength === this.columns.length) return
             if (!item.children || !item.children.length) {
+                let cellType: string = '';
+                if (keyLength < this.columns.length - 1) {
+                    cellType = 'textarea'
+                } else {
+                    cellType = 'button'
+                }
                 item.children = [
                     {
-                        name: '',
+                        name: '添加',
                         key: item.key + '-1',
-                        type: 'default'
+                        textAlign: 'left',
+                        type: cellType,
+                        value: '',
                     }
                 ]
             }
@@ -295,6 +322,12 @@ class Table extends Additional {
         } else {
             data = this.removeLine(key, this.data)
         }
+        this.forceUpdate()
+    }
+    /**
+     * @description 强制更新
+     */
+    forceUpdate() {
         this.treeData = this.data
     }
 }
