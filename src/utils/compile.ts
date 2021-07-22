@@ -24,3 +24,8 @@
 // const element = <h1>Hello, {name}</h1>;
 
 // ReactDOM.render(<div>11111111 < /div>, document.getElementById('compileCon'))
+
+
+export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
+    return key in object;
+}

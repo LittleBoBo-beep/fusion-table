@@ -1,4 +1,5 @@
 import { treeData, group } from './declare'
+import { isValidKey } from './utils/compile';
 /**
  * @description: 表格的单元格插入非纯文字操作
  */
@@ -18,9 +19,24 @@ class Additional {
             case 'select':
                 AdditionCell = this.createSelect(cell)
                 break;
+            case 'textarea':
+                AdditionCell = this.createTextArea(cell)
+              break;
+            case 'button':
+                AdditionCell = this.createButton(cell)
+              break;
             default:
                 AdditionCell = this.createInput(cell)
-                break;
+            	break;
+        }
+        // 设置options中的属性
+        if (cell.attributes && cell.attributes instanceof Object) {
+            for (const key in cell.attributes) {
+                if (isValidKey(key, cell.attributes)) {
+                    const attrVal = cell.attributes[key];
+                    AdditionCell.setAttribute(key, attrVal)
+                }
+            }
         }
         return AdditionCell
     }
@@ -65,6 +81,7 @@ class Additional {
                     }
                 }
             }
+            cell.events?.onInput && cell.events.onInput()
         }
         return input
     }
@@ -120,6 +137,19 @@ class Additional {
             select.appendChild(option)
         })
         return select
+    }
+    createTextArea(cell: treeData): HTMLTextAreaElement {
+        const textArea: HTMLTextAreaElement = document.createElement('textarea');
+        textArea.onblur = function () {
+            cell.value = textArea.value
+            cell.events?.onBlur && cell.events?.onBlur()
+        }
+        return textArea
+    }
+    createButton(cell: treeData): HTMLButtonElement {
+      const button: HTMLButtonElement = document.createElement('button')
+      button.innerText = cell.name
+        return button
     }
 }
 export default Additional

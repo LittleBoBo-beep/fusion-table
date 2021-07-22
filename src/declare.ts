@@ -13,6 +13,8 @@ export interface treeData {
     textAlign?: string
     children?: Array<treeData>
     placeholder?: string
+    attributes?: Object
+    events?: Events
 }
 
 export interface group {
@@ -36,3 +38,11 @@ export interface columns {
 // export interface RuReactOptions {
 //     container: HTMLElement
 // }
+// 全局的事件
+export interface Events {
+    onfocus?: Function
+    onBlur?: Function
+    onChange?: Function
+    onClick?: Function
+    onInput?: Function
+}

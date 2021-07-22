@@ -14,6 +14,7 @@ class Table extends Additional {
     private readonly fragment: DocumentFragment // fragment
     noDataContainer!: Element
     set treeData(data: Array<treeData>) {
+        this.completeData(data)
         this.data = data
         try {
             new Promise(resolve => {
@@ -139,7 +140,27 @@ class Table extends Additional {
                         break;
                 }
             } else {
-                this.appendCell(cell, this.renderAdditional(item))
+                const element: any = this.renderAdditional(item)
+                if (element.nodeName === 'BUTTON') {
+                    element.onclick = () => {
+                        if (item.events && item.events.onClick) {
+                            const options: any = item.events.onClick() || {}
+                            const { action: actionType = 'add', type: cellType = 'input' } = options
+                            let { mergeColumn = 2 } = options
+                            mergeColumn += 1
+                            if (mergeColumn > this.columns.length) {
+                                mergeColumn = this.columns.length - 1
+                            }
+                            let keyArr: Array<string> = [];
+                            for (let i = 0; i < mergeColumn; i++) {
+                                keyArr.push(item.key.split('-')[i])
+                            }
+                            const key: string = keyArr.join('-');
+                            this.actionLineButtonEvent(key, actionType, cellType)
+                        }
+                    }
+                }
+                this.appendCell(cell, element)
             }
             this.appendCell(cellCon, cell)
             this.appendCell(parentNode, cellCon)
@@ -184,10 +205,10 @@ class Table extends Additional {
     }
     /**
      * @description: 重新排序key值
-     * @return {*}
+     * @return {Array<treeData>}
      * @param {Array} data
      */
-    sortKey(data: Array<treeData>) {
+    sortKey(data: Array<treeData>): Array<treeData> {
         let key: number = 1;
         let preKey: string = ''
         let newKey: string = data[0].key
@@ -198,6 +219,83 @@ class Table extends Additional {
             cellData.key = preKey + key
             key++
         });
+        return data
+    }
+
+  /**
+   * @description 添加行操作
+    * @param {String} key
+    * @param {Array} data
+    * @param {string} cellType
+   */
+  addLine(key: string, cellType: string, data: Array<treeData>): Array<treeData> {
+        let newData: any = data
+        const cellKey = key.split('-')
+        for (let i = 0; i < cellKey.length - 1; i++) {
+            newData = newData[Number(cellKey[i]) - 1].children
+        }
+        let addKey = JSON.parse(JSON.stringify(cellKey))
+        addKey[cellKey.length - 1] = String(newData.length + 1)
+        const cellTypeLibrary = ['input', 'radio', 'checkbox', 'select', 'textarea', 'button', 'default']
+        if (!cellTypeLibrary.includes(cellType)) {
+            cellType = 'default'
+        }
+        let addData = {
+            key: addKey.join('-'),
+            textAlign: 'left',
+            type: cellType,
+            name: '',
+            value: '',
+            events: {
+            }
+        }
+        // if (typeof value === 'string') {
+        //     addData.name = value
+        // } else {
+        //     addData = Object.assign(addData, value)
+        // }
+        newData.splice(Number(cellKey[cellKey.length - 1]), 0, addData)
+        return this.sortKey(newData)
+  }
+      /**
+     * @description: 删除行操作
+     * @param {String} key
+     * @param {Array} data
+     * @param {string} value
+     */
+  removeLine(key: String, data: Array<treeData>): Array<treeData> {
+
+        let newData: any = data
+        const cellKey = key.split('-')
+        for (let i = 0; i < cellKey.length - 1; i++) {
+            newData = newData[Number(cellKey[i]) - 1].children
+        }
+            let parentData: any = data
+            for (let i = 0; i < cellKey.length - 1; i++) {
+                const element: number = Number(cellKey[i]);
+                parentData = parentData[element - 1].children
+            }
+            if (parentData.length <= 1) {
+                throw new Error("无法删除最后一个");
+            } else {
+                newData.splice(Number(cellKey[cellKey.length - 1]) - 1, 1)
+            }
+        return this.sortKey(newData)
+  }
+  /**
+   * @description 操作行动作按钮
+   * @param {String} actionType 
+   * @param {String} key 
+   * @param {String} cellType
+   */
+    actionLineButtonEvent(key: string, actionType: string, cellType: string) {
+        let data: Array<treeData> = []
+        if (actionType === 'add') {
+            data = this.addLine(key, cellType, this.data)
+        } else {
+            data = this.removeLine(key, this.data)
+        }
+        this.treeData = this.data
     }
 }
 export default Table

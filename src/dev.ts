@@ -247,6 +247,178 @@ const treeData = [
         ],
     },
 ];
+
+const treeDataTest = [
+    {
+        name: "root1",
+        textAlign: 'left',
+        type: 'default',
+        key: "1",
+        children: [
+            {
+                name: "child1",
+                textAlign: 'left',
+                type: 'default',
+                key: "1-1",
+                children: [
+                    {
+                        name: "添加",
+                        textAlign: 'left',
+                        type: 'button',
+                        key: "1-1-1",
+                        events: {
+                            onClick: function () {
+                                console.log('添加')
+                            }
+                        }
+                    },
+                    {
+                        name: "添加",
+                        textAlign: 'left',
+                        type: 'button',
+                        key: "1-1-2",
+                        events: {
+                            onClick: function () {
+                                console.log('添加')
+                            }
+                        }
+                    },
+                    {
+                        name: "添加",
+                        textAlign: 'left',
+                        type: 'button',
+                        key: "1-1-3",
+                        events: {
+                            onClick: function () {
+                                console.log('添加')
+                            }
+                        }
+                    }
+                ],
+            },
+            {
+                name: "child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2child2",
+                textAlign: 'left',
+                type: 'default',
+                key: "1-2",
+                children: [{
+                    name: "child1Child1",
+                    textAlign: 'left',
+                    type: 'default',
+                    key: "1-2-1",
+                },
+                {
+                    name: "child1Child2",
+                    textAlign: 'left',
+                    type: 'default',
+                    key: "1-2-2",
+                },
+                {
+                    name: "child1Child3",
+                    textAlign: 'left',
+                    type: 'default',
+                    key: "1-2-3",
+                }],
+            },
+        ],
+    },
+    {
+        name: "root2",
+        textAlign: 'center',
+        type: 'default',
+        key: "2",
+        children: [
+            {
+                name: "",
+                textAlign: 'left',
+                type: 'checkbox',
+                group: [
+                    { label: 'Apple', value: 'Apple' },
+                    { label: 'Pear', value: 'Pear' },
+                    { label: 'Orange', value: 'Orange' },
+                ],
+                value: [],
+                key: "2-1",
+                children: [
+                    {
+                        name: '',
+                        textAlign: 'left',
+                        type: 'input',
+                        placeholder: '请输入数字',
+                        value: '20',
+                        key: '2-1-1',
+                        options: {
+                            disabled: false,
+                            minlength: 0,
+                            maxlength: 20000
+                        },
+                    }
+                ],
+            },
+            {
+                name: "",
+                textAlign: 'left',
+                type: 'checkbox',
+                group: [
+                    { label: 'Apple', value: 'Apple' },
+                    { label: 'Pear', value: 'Pear' },
+                    { label: 'Orange', value: 'Orange' },
+                ],
+                value: [],
+                key: "2-2",
+            },
+            {
+                name: "",
+                textAlign: 'left',
+                type: 'checkbox',
+                group: [
+                    { label: 'Apple', value: 'Apple' },
+                    { label: 'Pear', value: 'Pear' },
+                    { label: 'Orange', value: 'Orange' },
+                ],
+                value: [],
+                key: "2-3",
+            }
+        ],
+    },
+    {
+        name: "root2",
+        textAlign: 'center',
+        type: 'default',
+        key: "3",
+        children: [
+            {
+                name: "",
+                textAlign: 'left',
+                type: 'select',
+                group: [
+                    { label: 'Apple', value: 'Apple' },
+                    { label: 'Pear', value: 'Pear' },
+                    { label: 'Orange', value: 'Orange' },
+                ],
+                value: 'Apple',
+                key: "3-1",
+                children: [
+                    {
+                        name: '',
+                        textAlign: 'left',
+                        type: 'input',
+                        placeholder: 'i love y',
+                        options: {
+                            disabled: false,
+                            minlength: 0,
+                            maxlength: 100,
+                            // mininum: 0,
+                            // maxinum: 100
+                        },
+                        value: '',
+                        key: '3-1-1'
+                    }
+                ],
+            },
+        ],
+    },
+];
 // 定义表格头部的数据
 const columns = [
     {
@@ -292,8 +464,8 @@ button1.onclick = function () {
 button2.onclick = function () {
     const options: any = {
         container: document.getElementById('container'),
-        data: [],
-        columns: []
+        data: treeDataTest,
+        columns
     }
     new Table(options)
 }
