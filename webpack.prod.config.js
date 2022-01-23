@@ -33,18 +33,5 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.less', '.css'],
     },
-    plugins: [
-        new CleanWebpackPlugin(),
-        // new UglifyJsPlugin({
-        //     uglifyOptions: {
-        //         // 删除console debugger 删除警告
-        //         compress: {
-        //             // warnings: false,
-        //             drop_console: true,//console
-        //             drop_debugger: false,
-        //             // pure_funcs: ['console.log']//移除console
-        //         }
-        //     }
-        // })
-    ]
+    plugins: [new CleanWebpackPlugin()]
 }

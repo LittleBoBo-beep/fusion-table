@@ -1,31 +1,28 @@
-const path = require('path')
-/**
- * @description: 拼接路径
- * @param {*} pathname
- */
-function resolve(pathname) {
-    return path.resolve(__dirname, pathname)
-}
+const resolve = require('./build/util/index')
+// 清理打包目录里面的文件
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// 生成html文件
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const environment = process.env.NODE_ENV
-let mode, entryPath
-if (environment === "production") {
-    entryPath = 'src/index.ts'
-    mode = environment
+const dev = require('./build/dev')
+const prod = require('./build/prod')
+let webpackConfig = null
+if (process.env.NODE_ENV === "production") {
+    // entryPath = 'src/index.ts'
+    // mode = environment
+    webpackConfig = prod
 } else {
-    entryPath = 'src/dev.ts'
-    mode = 'development'
+    // entryPath = 'src/dev.ts'
+    // mode = 'development'
+  webpackConfig = dev
 }
 module.exports = {
-    entry: resolve(entryPath),
+    ...webpackConfig,
     output: {
         path: resolve('dist'),
         filename: 'index.js',
-        libraryTarget: 'umd',
-        library: 'ru-merge-tree',
+        // libraryTarget: 'umd',
+        library: 'fusion-table',
     },
-    mode,
     module: {
         rules: [
             {
