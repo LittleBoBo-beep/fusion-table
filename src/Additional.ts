@@ -1,4 +1,4 @@
-import { treeData, group } from './declare'
+import { treeData, group } from './Interface/declare'
 /**
  * @description: 表格的单元格插入非纯文字操作
  */

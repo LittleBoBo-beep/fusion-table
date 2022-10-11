@@ -2,7 +2,8 @@ const path = require('path')
 
 /**
  * @description: 拼接路径
- * @param {*} pathname
+ * @param { string } pathname
+ * @return { string } url
  */
 function resolve(pathname) {
   return path.resolve(__dirname, pathname)
@@ -12,12 +13,14 @@ function resolve(pathname) {
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 // 生成html文件
 const htmlWebpackPlugin = require('html-webpack-plugin');
+
 const mode = process.env.NODE_ENV
-const entry = mode === 'production' ? './src/index.ts' : './src/dev.ts'
+
+const entry = mode === 'production' ? './src/index.ts' : './example/main.ts'
 module.exports = {
   entry: resolve(entry),
   output: {
-    path: resolve('dist'),
+    path: resolve('build'),
     filename: 'index.js',
     library: {
       name: 'fusion-table',
@@ -49,19 +52,16 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    // Plugin that simplifies creation of HTML files to serve your bundles
     new htmlWebpackPlugin({
       template: resolve('./public/index.html')
     }),
-    // remove build folder file
     new CleanWebpackPlugin(),
   ],
   devServer: {
     contentBase: resolve('public'),
-    open: true,
+    open: false,
     hot: true,
     hotOnly: true,
-    port: 8080,
-    host: "127.0.0.1"
+    port: 8080
   }
 }

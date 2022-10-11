@@ -1,5 +1,4 @@
-import Table from '@/Table'
-import '@/index.less'
+import Table from './lib/index'
+import './css/index.less'
 
-// module.exports = Table
 export default Table

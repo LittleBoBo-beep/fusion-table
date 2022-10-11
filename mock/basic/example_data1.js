@@ -171,58 +171,61 @@ export const treeData = [
     key:
       "2",
     children: [
-        {
-          name: "我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，，我是联合总部，我是联合总部，我是联合总部，我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部",
-          textAlign: 'left',
-          type: 'default',
-          group: [
-            {label: 'Apple', value: 'Apple'},
-            {label: 'Pear', value: 'Pear'},
-            {label: 'Orange', value: 'Orange'},
-          ],
-          value: [],
-          key: "2-1",
-          children: [
-            {
-              name: '',
-              textAlign: 'left',
-              type: 'input',
-              placeholder: '请输入数字',
-              value: '20',
-              key: '2-1-1',
-              options: {
-                disabled: false,
-                minlength: 0,
-                maxlength: 20000
-              },
-            }
-          ],
-        },
-        {
-          name: "",
-          textAlign: 'left',
-          type: 'checkbox',
-          group: [
-            {label: 'AppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleApple', value: 'Apple'},
-            {label: 'Pear', value: 'Pear'},
-            {label: 'Orange', value: 'Orange'},
-          ],
-          value: [],
-          key: "2-2",
-        },
-        {
-          name: "",
-          textAlign: 'left',
-          type: 'checkbox',
-          group: [
-            {label: 'Apple', value: 'Apple'},
-            {label: 'Pear', value: 'Pear'},
-            {label: 'Orange', value: 'Orange'},
-          ],
-          value: [],
-          key: "2-3",
-        }
-      ],
+      {
+        name: "我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，我是联合总部，，我是联合总部，我是联合总部，我是联合总部，我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部我是联合总部",
+        textAlign: 'left',
+        type: 'default',
+        group: [
+          {label: 'Apple', value: 'Apple'},
+          {label: 'Pear', value: 'Pear'},
+          {label: 'Orange', value: 'Orange'},
+        ],
+        value: [],
+        key: "2-1",
+        children: [
+          {
+            name: '',
+            textAlign: 'left',
+            type: 'input',
+            placeholder: '请输入数字',
+            value: '20',
+            key: '2-1-1',
+            options: {
+              disabled: false,
+              minlength: 0,
+              maxlength: 20000
+            },
+          }
+        ],
+      },
+      {
+        name: "",
+        textAlign: 'left',
+        type: 'checkbox',
+        group: [
+          {
+            label: 'AppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleApple',
+            value: 'Apple'
+          },
+          {label: 'Pear', value: 'Pear'},
+          {label: 'Orange', value: 'Orange'},
+        ],
+        value: [],
+        key: "2-2",
+      },
+      {
+        name: "",
+        textAlign: 'left',
+        type: 'checkbox',
+        group: [
+          {label: 'Apple', value: 'Apple'},
+          {label: 'Pear', value: 'Pear'},
+          {label: 'Orange', value: 'Orange'},
+        ],
+        value: [],
+        key: "2-3",
+      }
+    ],
   },
   {
     name: "root2",

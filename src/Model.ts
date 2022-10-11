@@ -1,4 +1,4 @@
-import { treeData } from './declare'
+import { treeData } from './Interface/declare'
 /**
  * @name: Model
  * @description: 生成model与添加删除修改的操作

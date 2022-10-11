@@ -241,7 +241,7 @@ let table = new Table(options);
 
 [avatar](https://github.com/LittleBoBo-beep/tree-table/blob/main/docs/action.gif)
 
-![alt 属性文本](./docs/updateView.png)
+![alt 属性文本](docs/assets/updateView.png)
 
 添加textAlign改变单元格的字体位置
 添加options.mininum与options.maxinum字段显示大小

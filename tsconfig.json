@@ -1,27 +1,25 @@
   {
     "compilerOptions": {
-      "target": "ES2016", // 编译过程中需要引入的库文件的列表。可能的值为  /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
+      "target": "ES2016",
       "module": "commonjs",
       "allowJs": true,
-      "jsx": "react",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+      "jsx": "react",
       "declaration": true,
       "outDir": "./dist/",
       "removeComments": true,
       "strict": true,
       "alwaysStrict": true,
       "locale": "en-us",
-      "baseUrl": ".",
+      "baseUrl": "./",
       "paths": {
-        "@/*": ["./src/*.ts"],
-        "dev": ["./html/dev.ts"]
+        "@/*": ["./src/*.ts"]
       },
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+      "forceConsistentCasingInFileNames": true
     },
     "include": [
-      "src/**/*",
-      "html/*"
+      "src/**/*"
     ],
     "exclude": [
       "node_modules"

@@ -1,5 +1,4 @@
-import { TableOptions, treeData, columns } from './declare'
-// import Model from './Model'
+import { TableOptions, treeData, columns } from './Interface/declare'
 import Additional from './Additional'
 /**
  * @name: Table
